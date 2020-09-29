@@ -7,6 +7,7 @@ export default function App() {
     <View style={styles.container}>
       <Text>Tässä on Waltterin lisäämä teksti!</Text>
       <Text>Tässä on Kallen lisäämä teksti!</Text>
+      <Text>Tässä on Eeron lisäämä teksti!</Text>
       <StatusBar style="auto" />
     </View>
   );
