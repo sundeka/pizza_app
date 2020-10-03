@@ -1,21 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator} from 'react-navigation-stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Testitestitesti</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import SecondPage from './pages/Orderpage';
+import FirstPage from './pages/Firstpage';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const App = createStackNavigator({
+    FirstPage: { screen: FirstPage }, 
+    SecondPage: { screen: SecondPage }, 
   },
-});
+  {
+    initialRouteName: 'FirstPage',
+  }
+);
+export default createAppContainer(App);
