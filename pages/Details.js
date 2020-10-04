@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TextInput, Button } from 'react-native';
 
-const Detailsscreen = () => {
+const Detailscreen = () => {
   return (
     <SafeAreaView style={styles.container}>
         <View style={styles.topBar}>
@@ -184,4 +184,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Detailsscreen;
+export default Detailscreen;

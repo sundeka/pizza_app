@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View} from 'react-native';
-import { createStackNavigator, createAppContainer, createSwitchNavigator} from 'react-navigation';
+import { createAppContainer, createSwitchNavigator} from 'react-navigation';
+import { createStackNavigator } from '@react-navigation/stack';
+
 
 
 import HomeScreen from './pages/Login';

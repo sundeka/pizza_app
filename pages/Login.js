@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Platform, TextInput, TouchableOpacity, Image, A
 
 const userInfo = {username: 'admin', password: 'password'}
 
-class Homescreen extends Component {
+class LoginScreen extends Component {
   static navigationOptions = {
     header: null
   }
@@ -161,4 +161,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default HomeScreen;
+export default LoginScreen;
