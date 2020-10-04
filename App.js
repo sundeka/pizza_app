@@ -1,15 +1,79 @@
-import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import React, {Component} from 'react';
+import {ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View} from 'react-native';
+import { createStackNavigator, createAppContainer, createSwitchNavigator} from 'react-navigation';
 
 
-import LoginPage from './pages/LoginPage.js'
+import HomeScreen from './pages/Login';
+import DetailsScreen from './pages/Details';
 
 
-export default function App() {
-  return (
-    
-      <LoginPage/>
-      
-  );
+const RootStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Details: DetailsScreen
+  },
+  {
+    // initialRouteName: 'Home',
+    defaultNavigationOptions: {
+        headerStyle: {
+          backgroundColor: '#1e90ff'
+        },
+        hearedTintColor: '#fff',
+        hearedTitleStyle: {
+          textAlign: 'center',
+          flex: 1
+        }
+    }
+  },
+);
+const AuthStack = createStackNavigator({Home: HomeScreen})
+
+class AuthLoadingScreen extends Component{
+  constructor(props){
+    super(props)
+    this._loadData();
+  }
+
+  render() {
+    return(
+      <View style={styles.container}>
+        <ActivityIndicator/>
+        <StatusBar barStyle="default"/>
+      </View>
+    );
+  }
+  _loadData = async() => {
+      const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+      this.props.navigation.navigate(inLoggedIn !== '1'? 'Auth' : 'App');
+  }
+
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#A32706',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+});
+
+export default createAppContainer(createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    App: RootStack,
+    Auth: AuthStack,
+  },
+  {
+    initialRouteName: 'AuthLoading',
+  }
+
+));
+
+
+
+
+
+
+
 

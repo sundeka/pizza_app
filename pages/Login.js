@@ -1,37 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Platform, TextInput, TouchableOpacity, Image, Alert, Button} from 'react-native';
+import { StyleSheet, Text, View, Platform, TextInput, TouchableOpacity, Image, Alert, Button, AsyncStorage} from 'react-native';
 
 
+const userInfo = {username: 'admin', password: 'password'}
 
-
-export default class App extends Component {
+class Homescreen extends Component {
+  static navigationOptions = {
+    header: null
+  }
 
   constructor(props) {
-    super(props);
-    
+    super(props);  
     this.state = {
       username: '',
       password: '',
     };
   }
 
-  // go = () => {
-  //          const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  //           if (reg.test(this.state.username) === true){
-  //              alert('valid');
-  //          }
-  //          else{
-  //              alert();
-  //          }
- 
-  // }
-  
-  onLogin() {
-    const { username, password } = this.state;
-
-    Alert.alert('Credentials', `${username} + ${password}`);
-  }
 
 
   render() {   
@@ -72,7 +58,7 @@ export default class App extends Component {
             onChangeText={(username) => this.setState({ username })}         
             style={styles.input}
             placeholder="Username"
-            label='Username'
+            autoCapitalize="none"
           />
           
           <TextInput
@@ -81,14 +67,15 @@ export default class App extends Component {
             style={styles.input}
             placeholder="Password"
             secureTextEntry
-            label='Password'
+            
           />
 
           
           <View style={styles.BtnContainer}>
-            {/* <TouchableOpacity 
+            <TouchableOpacity 
               style={styles.userBtn} 
-              onPress={() => alert("Login Works")}
+              onPress={this._login}
+              // onPress={() => this.props.navigation.navigate('Details')}
             >
               <Text style={styles.btnTxt}>Login</Text>
             </TouchableOpacity>
@@ -98,14 +85,14 @@ export default class App extends Component {
               onPress={() => alert("Sign up Works")}
             >
               <Text style={styles.btnTxt}>Sign up</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
 
-            <Button
+            {/* <Button
             style={styles.userBtn}
             title={'Login'}
             onPress={this.onLogin.bind(this)}
             
-            />
+            /> */}
 
 
 
@@ -115,6 +102,22 @@ export default class App extends Component {
         </View>
       );
     }
+
+    _login = async() => {
+      if(userInfo.username === this.state.username && userInfo.password === this.state.password) {
+        // alert('Logged in');
+        await AsyncStorage.setItem('isLoggedIn', '1');
+        this.props.navigation.navigate('Details');
+      } else {
+        alert('Username or Password is incorrect');
+      } 
+      
+    }
+  
+
+
+
+
   }
 
 const styles = StyleSheet.create({
@@ -148,8 +151,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFD700",
     padding: 15,
     width: "45%",
-    fontSize: 18,
-    textAlign: "center",
+    // fontSize: 18,
+    // textAlign: "center",
   },
   btnTxt: {
     fontSize: 18,
@@ -158,4 +161,4 @@ const styles = StyleSheet.create({
   }
 });
 
-
+export default HomeScreen;
