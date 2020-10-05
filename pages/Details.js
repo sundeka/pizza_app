@@ -1,3 +1,68 @@
+// import React, { Component } from 'react';
+// import { StyleSheet, View, Button} from 'react-native';
+
+// export default class SecondPage extends Component {
+//   static navigationOptions = {
+//     title: 'First Page',
+//     //Sets Header text of Status Bar
+//     headerStyle: {
+//       backgroundColor: '#f4511e',
+//       //Sets Header color
+//     },
+//     headerTintColor: '#fff',
+//     //Sets Header text color
+//     headerTitleStyle: {
+//       fontWeight: 'bold',
+//       //Sets Header text style
+//     },
+//   };
+
+//   render() {
+//     const { navigate } = this.props.navigation;
+//     return (
+//       <View style={styles.container}>
+//         <Button title='Go next'
+//         onPress={() =>navigate('SecondPage')}
+//         />
+//       </View>
+//     );
+//   }
+// }
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { Component } from 'react';
 import {StatusBar, StyleSheet, View, Text, TextInput, TouchableOpacity, Button, AsyncStorage} from 'react-native';
 
@@ -20,12 +85,13 @@ class DetailsScreen extends Component {
 
 
         </View>
-        </View>
+       </View>
      );
    }
 
    _logout = async() => {
      await AsyncStorage.clear();
+     this.props.navigation.navigate('Auth');
    }
 }
 
@@ -72,7 +138,7 @@ const styles = StyleSheet.create({
   }
 });
 
-
+export default DetailsScreen;
 
 
 

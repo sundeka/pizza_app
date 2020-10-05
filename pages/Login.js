@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image} from 'react-native';
 
 
+
 const userInfo = {username: 'admin', password: 'password'}
 
 class LoginScreen extends Component {
-  static navigationOptions = {
+// export default class FirstPage extends Component{
+    static navigationOptions = {
     header: null
   }
 
@@ -86,12 +88,7 @@ class LoginScreen extends Component {
               <Text style={styles.btnTxt}>Sign up</Text>
             </TouchableOpacity>
 
-            {/* <Button
-            style={styles.userBtn}
-            title={'Login'}
-            onPress={this.onLogin.bind(this)}
             
-            /> */}
 
 
 
@@ -104,10 +101,9 @@ class LoginScreen extends Component {
 
     _login = async() => {
       if(userInfo.username === this.state.username && userInfo.password === this.state.password) {
-        alert('Logged in');
-        
-        // await AsyncStorage.setItem('isLoggedIn', '1');
-        // this.props.navigation.navigate('Details');
+        // alert('Logged in');
+        await AsyncStorage.setItem('isLoggedIn', '1');
+        this.props.navigation.navigate('Details');
       } else {
         alert('Username or Password is incorrect');
       } 
@@ -162,3 +158,4 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+
