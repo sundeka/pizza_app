@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TextInput, Button } from 'react-native';
 
+import FetchFillings from '../dbconn/FetchFillings.js';
+
 const FrontPage = () => {
   return (
     <SafeAreaView style={styles.container}>
@@ -11,23 +13,12 @@ const FrontPage = () => {
             <View style={styles.titlediv}>
                 <Text style={styles.titletext}>SELECT YOUR TOPPINGS</Text>
             </View>
-            <View style={styles.searchbardiv}>
-                <TextInput 
-                    style={styles.searchbar}
-                    placeholder="Search for a topping"
-                />
+            <View style={styles.decisions}>
+                <FetchFillings/>
             </View>
-            <View style={styles.fillingsdiv}>
-                <Text style={styles.fillingtext}>[x] Oregano</Text>
-                <Text style={styles.fillingtext}>[x] Jalopeno</Text>
-                <Text style={styles.fillingtext}>[x] Tuna</Text>
-                <Text style={styles.fillingtext}>[x] Pepperoni</Text>
-                <Text style={styles.fillingtext}>[x] Pineapple</Text>
-                <Text style={styles.fillingtext}>[x] Ham</Text>
-                <Text style={styles.fillingtext}>[x] Garlic</Text>
-                <Text style={styles.fillingtext}>[x] Chilli</Text>
-                <Text style={styles.fillingtext}>[x] Mushrooms</Text>
-            </View>
+{/*             <View style={styles.fillingsdiv}>
+                <Text style={styles.fillingtext}>Placeholder</Text>
+            </View> */}
             <View style={styles.titlediv}>
                 <Text style={styles.titletext}>RECOMMENDED PIZZAS</Text>
             </View>
@@ -116,32 +107,14 @@ const styles = StyleSheet.create({
         color: '#851d41'
     },
 
-    searchbardiv: {
+    decisions: {
+        backgroundColor: '#ff6464',
         width: '90%',
         alignSelf: 'center',
-        flex: 1,
+        flex: 3,
         justifyContent: 'center'
-    }, searchbar: {
-        paddingLeft: 5,
-        backgroundColor: '#ff6464',
     },
 
-    fillingsdiv: {
-        width: '90%',
-        alignSelf: 'center',
-        alignContent: 'stretch',
-        backgroundColor: '#db3056',
-        flex: 2,
-        flexWrap: 'wrap',
-        paddingTop: '3%',
-        paddingLeft: '3%',
-        paddingRight: '3%' 
-    }, fillingtext: {
-        color: '#851d41',
-        fontSize: 17,
-        fontWeight: 'bold'
-    },
-    
     pizzalistdiv: {
         width: '90%',
         alignSelf: 'center',
