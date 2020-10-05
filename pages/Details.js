@@ -69,23 +69,56 @@ import {StatusBar, StyleSheet, View, Text, TextInput, TouchableOpacity, Button, 
 
 class DetailsScreen extends Component {
    static navigationOptions = {
-     title: 'My app',
+     title: 'Order Page',
      headerRight: <View />
    }
 
    render(){
+      const { navigate } = this.props.navigation;
      return (
-       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>      
-        <View style={styles.container}>
-          <Button onPress={this._logout} title="Logout" />
+            
+        <View style={styles.container}>   
+          <Text style={styles.textStyle}>NAME:</Text>
+            <TextInput placeholder="Your name" style={styles.inputStyle}/> 
+              <Text>ADDRESS:</Text>
+            <TextInput placeholder="Your address" style={styles.inputStyle}/> 
+              <Text>EMAIL:</Text>
+            <TextInput placeholder="Your email" style={styles.inputStyle}/> 
+              <Text>PHONE:</Text>
+            <TextInput placeholder="Your phone" style={styles.inputStyle}/> 
+
+
+            <Text>TOTAL PRICE</Text>
+            <Text>8.00€</Text>
 
 
 
 
+            <View style={styles.BtnContainer}>
+            <TouchableOpacity 
+              style={styles.userBtn} 
+              onPress={() => alert("Valmistellaan tilausta")}
+              
+            >
+              <Text style={styles.btnTxt}>Order Now</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={styles.userBtn}
+              onPress={this._logout}
+              
+            >
+              <Text style={styles.btnTxt}>Logout</Text>
+            </TouchableOpacity>
+
+            {/* <Button title="Order now" style={styles.orderButton}/> */}
+           {/* <Button onPress={this._logout} title="Logout" style={styles.orderButton2} /> */}
 
 
+
+          </View>
         </View>
-       </View>
+       
      );
    }
 
@@ -101,22 +134,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#A32706',
+    margin:2,
     alignItems: 'center',
-    justifyContent: 'center',
+    //justifyContent: 'center',
   },
-  
-  welcome: {
-    fontSize: 25,
-    textAlign: 'center',
-    margin: 10,
-    color: '#fff',
-    marginBottom: 30,
+  formStyle: {
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    alignItems:"center"
   },
-  input: {
-    width: "90%",
-    backgroundColor: "#fff",
-    padding: 15,
+  inputStyle: {
+    backgroundColor: '#fff',
+    borderWidth: 2, 
+    borderColor: 'black', 
+    padding: 10,
+    width:'80%',
+  },
+  textStyle: {
+    textAlign: 'left'
+
+  },
+  orderButton: {
+    position: 'absolute',
     marginBottom: 10,
+
+  },
+  orderButton2: {
+    position: 'absolute',
+    marginTop: 20,
+
   },
   BtnContainer: {
     flexDirection: "row",
