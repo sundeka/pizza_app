@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image} from 'react-native';
 
 
 const userInfo = {username: 'admin', password: 'password'}
@@ -31,10 +31,10 @@ class LoginScreen extends Component {
               style={{ width: 200, height: 130 }}
           /> */}
 
-          {/* <Image 
-              source={require('./assets/pizzalogo14.png')} 
+          <Image 
+              source={require('../assets/pizzalogo14.png')} 
               style={{ width: 205, height: 160, marginBottom: 30}}
-          /> */}
+          />  
 
           <StatusBar
               backgroundColor="#A32706"
@@ -104,9 +104,10 @@ class LoginScreen extends Component {
 
     _login = async() => {
       if(userInfo.username === this.state.username && userInfo.password === this.state.password) {
-        // alert('Logged in');
-        await AsyncStorage.setItem('isLoggedIn', '1');
-        this.props.navigation.navigate('Details');
+        alert('Logged in');
+        
+        // await AsyncStorage.setItem('isLoggedIn', '1');
+        // this.props.navigation.navigate('Details');
       } else {
         alert('Username or Password is incorrect');
       } 
