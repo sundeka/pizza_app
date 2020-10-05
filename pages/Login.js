@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Platform, TextInput, TouchableOpacity, Image, Alert, Button, AsyncStorage} from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar} from 'react-native';
 
 
 const userInfo = {username: 'admin', password: 'password'}

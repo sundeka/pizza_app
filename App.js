@@ -1,7 +1,11 @@
+import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import {ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View} from 'react-native';
-import { createAppContainer, createSwitchNavigator} from 'react-navigation';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createSwitchNavigator } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+// import { createStackNavigator } from 'react-navigation-stack';
+//import { createStackNavigator } from '@react-navigation/stack';
 
 
 
@@ -11,7 +15,7 @@ import DetailsScreen from './pages/Details';
 
 const RootStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    //HomePage: HomeScreen,
     Details: DetailsScreen
   },
   {
