@@ -16,9 +16,6 @@ const FrontPage = () => {
             <View style={styles.decisions}>
                 <FetchFillings/>
             </View>
-{/*             <View style={styles.fillingsdiv}>
-                <Text style={styles.fillingtext}>Placeholder</Text>
-            </View> */}
             <View style={styles.titlediv}>
                 <Text style={styles.titletext}>RECOMMENDED PIZZAS</Text>
             </View>

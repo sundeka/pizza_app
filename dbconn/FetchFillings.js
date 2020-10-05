@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
-import { View, Picker, Text, StyleSheet } from 'react-native';
+import { View, Picker, Text, StyleSheet, Alert } from 'react-native';
 
 const FetchFillings = () => {
     const [fillings, setFillings] = useState([]);
-    const [selectedValue, setSelectedValue] = useState("undef")
+    const [selectedValue, setSelectedValue] = useState("Select a topping")
     const [selectedFillings, addSelectedFillings] = useState([]);
 
     async function fetchFillings() {
@@ -13,8 +13,12 @@ const FetchFillings = () => {
     };
 
     const appendList = (item) => {
-        if (item!="undef"){
-            setSelectedValue(item);
+        setSelectedValue(item);
+        if (selectedFillings.includes(item)){
+            Alert.alert("No duplicates allowed!", "You have already selected this topping.")
+        } else if(item==="Select a topping") {
+            console.log("toimi")
+        } else {
             addSelectedFillings(selectedFillings=>[...selectedFillings, item]);
         }
     }
