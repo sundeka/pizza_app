@@ -7,7 +7,7 @@ const FrontPage = () => {
   return (
     <SafeAreaView style={styles.container}>
         <View style={styles.topBar}>
-            <Text style={styles.logo}>LOGO HERE</Text>
+            <Text style={styles.logo}>LOGO</Text>
         </View>
         <View style={styles.content}>
             <View style={styles.titlediv}>
