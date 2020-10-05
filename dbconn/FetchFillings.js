@@ -17,7 +17,7 @@ const FetchFillings = () => {
         if (selectedFillings.includes(item)){
             Alert.alert("No duplicates allowed!", "You have already selected this topping.")
         } else if(item==="Select a topping") {
-            console.log("toimi")
+            return;
         } else {
             addSelectedFillings(selectedFillings=>[...selectedFillings, item]);
         }
