@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
-import { View, Picker, Text, StyleSheet, Alert } from 'react-native';
+import { View, Picker, Text, StyleSheet, Alert, Button } from 'react-native';
 
-const FetchFillings = () => {
+const FetchFillings = (props) => {
     const [fillings, setFillings] = useState([]);
     const [selectedValue, setSelectedValue] = useState("Select a topping")
     const [selectedFillings, addSelectedFillings] = useState([]);
@@ -40,17 +40,25 @@ const FetchFillings = () => {
                     <Text style={styles.fillingtext}>{it}</Text>
                 )}
             </View>
+            <View style={styles.buttondiv}>
+                <Button 
+                    style={styles.buttonstyle}
+                    title="SEARCH FOR PIZZAS"
+                    color="#851d41"
+                    onPress={()=>props.onAddToppings(selectedFillings)}
+                />
+            </View>     
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex:3,
+        flex:7,
     },
     
     searchbar: {
-        flex: 1,
+        flex: 2,
         backgroundColor: '#ff6464',
     },
 
@@ -59,7 +67,7 @@ const styles = StyleSheet.create({
         alignContent: 'stretch',
         backgroundColor: '#db3056',
         width: '100%',
-        flex: 2,
+        flex: 3,
         flexWrap: 'wrap',
         paddingTop: '3%',
         paddingLeft: '3%',
@@ -69,6 +77,16 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: 'bold'
     },
+
+    buttondiv: {
+        width: '100%',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        flex: 2,
+        backgroundColor: '#ffae8f'
+    }, buttonstyle: {
+        alignSelf: 'center',
+    }
 })
 
 export default FetchFillings;
