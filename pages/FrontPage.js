@@ -3,21 +3,6 @@ import { View, Text, StyleSheet, SafeAreaView, Button, TouchableOpacity, FlatLis
 
 import FetchFillings from '../dbconn/FetchFillings.js';
 
-const DATA = [
-    {
-        id: 1,
-        restaurant: "Ahmedinpizza",
-        pizzaname: "Testipizza",
-        price: 4.3,
-    },
-    {
-        id: 2,
-        restaurant: "Kotipizza",
-        pizzaname: "Tunathang",
-        price: 5.3,
-    }
-]
-
 const FrontPage = () => {
     const [menus, setMenus] = useState([]);
     const [selectedId, setSelectedId] = useState(null)
@@ -69,7 +54,7 @@ const FrontPage = () => {
             <View style={styles.pizzalistdiv}>
                  <View style={styles.flatliststyle}>
                     <FlatList
-                        data={DATA} //vaihda
+                        data={menus} //vaihda
                         renderItem={renderItem}
                         keyExtractor={(item) => item.id}
                         extraData={selectedId}
@@ -103,8 +88,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     }, logo: {
         alignSelf: 'center',
-        fontSize: 30, //POISTA
-        color: '#851d41', //POISTA
         height: '80%',
         resizeMode: 'contain'
     },
