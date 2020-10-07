@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 
 const PrintResults = () => {
-    const [menus, setMenus] = useState([]);
     const [selectedId, setSelectedId] = useState(1) //uus
 
     const Item = ({ item, onPress, style }) => ( //uus
@@ -24,16 +23,6 @@ const PrintResults = () => {
             />
         )
     }
-
-    async function fetchMenus() {
-        await fetch("https://pizzaapp-290908.ew.r.appspot.com/rest/db/getAllMenus")
-        .then(parameter=>parameter.json())
-        .then(anotherParam=>setMenus(anotherParam));
-    };
-
-    useEffect(() => {
-        fetchMenus();
-    })
 
     return (
         <View style={styles.container}>

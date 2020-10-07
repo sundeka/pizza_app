@@ -1,19 +1,63 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Button } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Button, TouchableOpacity, FlatList, Image } from 'react-native';
 
 import FetchFillings from '../dbconn/FetchFillings.js';
-import PrintResults from '../dbconn/PrintResults.js';
+
+const DATA = [
+    {
+        id: 1,
+        restaurant: "Ahmedinpizza",
+        pizzaname: "Testipizza",
+        price: 4.3,
+    },
+    {
+        id: 2,
+        restaurant: "Kotipizza",
+        pizzaname: "Tunathang",
+        price: 5.3,
+    }
+]
 
 const FrontPage = () => {
+    const [menus, setMenus] = useState([]);
+    const [selectedId, setSelectedId] = useState(null)
+
+     const Item = ({ item, onPress, style }) => (
+        <TouchableOpacity onPress={onPress} style={styles.itemi, style}>
+            <Text style={styles.infotext}>{item.restaurant}</Text>
+            <Text style={styles.infotext}>{item.pizzaname}</Text> 
+            <Text style={styles.pricetext}>{item.price}€</Text>
+        </TouchableOpacity>
+    ); 
+
+     const renderItem = ({ item }) => {
+        const backgroundColor = item.id === selectedId ? "#c44747" : "#ff6464";
+
+        return (
+            <Item
+                item={item}
+                onPress={() => setSelectedId(item.id)}
+                style={{ backgroundColor }}
+            />
+        )
+    } 
+
+     async function fetchMenus() {
+        await fetch("https://pizzaapp-290908.ew.r.appspot.com/rest/db/getAllMenus")
+        .then(parameter=>parameter.json())
+        .then(anotherParam=>setMenus(anotherParam));
+    }; 
 
     const receiveParams=(fishArr)=>{
+        fetchMenus();
         console.log(JSON.stringify(fishArr));
-    }
+    };
 
   return (
     <SafeAreaView style={styles.container}>
         <View style={styles.topBar}>
-            <Text style={styles.logo}>LOGO</Text>
+            <Image source={require('../assets/pizza10.png')}
+            style={styles.logo}/>
         </View>
         <View style={styles.content}>
             <View style={styles.titlediv}>
@@ -23,7 +67,14 @@ const FrontPage = () => {
                 <FetchFillings onAddToppings={receiveParams}/>
             </View>
             <View style={styles.pizzalistdiv}>
-                <PrintResults/>
+                 <View style={styles.flatliststyle}>
+                    <FlatList
+                        data={DATA} //vaihda
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                        extraData={selectedId}
+                    />   
+                </View> 
             </View>
             <View style={styles.buttondiv}>
                 <Button 
@@ -54,6 +105,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 30, //POISTA
         color: '#851d41', //POISTA
+        height: '80%',
+        resizeMode: 'contain'
     },
 
     content: {
@@ -87,6 +140,25 @@ const styles = StyleSheet.create({
         backgroundColor: '#db3056',
         flex: 4,
         padding: '3%'
+    }, flatliststyle: {
+        backgroundColor: '#ff6464',
+        height: '100%',
+    }, itemi: {
+        width: '100%',
+        borderWidth: 1,
+        borderColor: '#851d41',
+    },
+
+    infotext: {
+        fontSize: 20,
+        color: '#851d41',
+        fontWeight: 'bold',
+        alignSelf: 'center'
+    }, pricetext: {
+        fontWeight: 'bold',
+        fontSize: 35,
+        color: '#851d41',
+        alignSelf: 'center'
     },
 
     buttondiv: {
