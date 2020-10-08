@@ -25,13 +25,13 @@ const FetchFillings = (props) => {
 
     useEffect(() => {
         fetchFillings();
-    });
+    }, []);
 
     return(
         <View style={styles.container}>
             <View style={styles.searchbar}>
                 <Picker selectedValue={selectedValue} onValueChange={(itemValue) => appendList(itemValue)}>
-                    {fillings.map((item) => (<Picker.Item color="#851d41" label={item.topping} value={item.topping}/>))}
+                    {fillings.map((item) => (<Picker.Item key={item.id} color="#851d41" label={item.topping} value={item.topping}/>))}
                 </Picker>
             </View>
             

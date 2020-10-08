@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Button, TouchableOpacity, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Button, TouchableOpacity, FlatList, Image, Alert } from 'react-native';
 
 import FetchFillings from '../dbconn/FetchFillings.js';
 
 const FrontPage = () => {
-    const [menus, setMenus] = useState([]);
+    const [menus, setMenus] = useState([]); //tähän tallentuu koko menu mistä valitaan käyttäjän täytteisiin sopivat pizzat
     const [selectedId, setSelectedId] = useState(null)
+    const [ehdotusLista, setEhdotusLista] = useState([]); //tallenna tähän käyttäjän valitsemat täytteet
 
      const Item = ({ item, onPress, style }) => (
         <TouchableOpacity onPress={onPress} style={styles.itemi, style}>
@@ -23,19 +24,26 @@ const FrontPage = () => {
                 item={item}
                 onPress={() => setSelectedId(item.id)}
                 style={{ backgroundColor }}
+                key={item.id}
             />
         )
     } 
-
-     async function fetchMenus() {
+ 
+    async function fetchMenus(syote) {
         await fetch("https://pizzaapp-290908.ew.r.appspot.com/rest/db/getAllMenus")
         .then(parameter=>parameter.json())
         .then(anotherParam=>setMenus(anotherParam));
-    }; 
 
-    const receiveParams=(fishArr)=>{
-        fetchMenus();
-        console.log(JSON.stringify(fishArr));
+        setEhdotusLista([]);
+        
+        //syote on array, joka sisältää käyttäjän antamat syötteet
+        for (var i=0;i<menus.length;i++){
+            for (var j=0; j<syote.length;j++){
+                if (menus[i].tayte1 === syote[j] || menus[i].tayte2 === syote[j] || menus[i].tayte3 === syote[j]){
+                    setEhdotusLista(ehdotusLista=>[...ehdotusLista, menus[i]]);
+                }
+            }
+        }
     };
 
   return (
@@ -49,16 +57,16 @@ const FrontPage = () => {
                 <Text style={styles.titletext}>SELECT YOUR TOPPINGS</Text>
             </View>
             <View style={styles.decisions}>
-                <FetchFillings onAddToppings={receiveParams}/>
+                <FetchFillings onAddToppings={fetchMenus}/>
             </View>
             <View style={styles.pizzalistdiv}>
                  <View style={styles.flatliststyle}>
-                    <FlatList
-                        data={menus} //vaihda
+                     <FlatList
+                        data={ehdotusLista} //vaihda
                         renderItem={renderItem}
                         keyExtractor={(item) => item.id}
                         extraData={selectedId}
-                    />   
+                    />    
                 </View> 
             </View>
             <View style={styles.buttondiv}>
