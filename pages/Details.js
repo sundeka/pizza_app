@@ -52,17 +52,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 import React, { Component } from 'react';
 import {StatusBar, StyleSheet, View, Text, TextInput, TouchableOpacity, Button, AsyncStorage} from 'react-native';
 

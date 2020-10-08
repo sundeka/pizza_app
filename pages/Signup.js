@@ -4,9 +4,9 @@ import { Actions } from 'react-native-router-flux';
 
 
 
-const userInfo = {username: 'admin', password: 'password'}
 
-class LoginScreen extends Component {
+
+class SignupScreen extends Component {
 // export default class FirstPage extends Component{
     static navigationOptions = {
     header: null
@@ -20,9 +20,9 @@ class LoginScreen extends Component {
     };
   }
 
-  // signup() {
-	// 	Actions.signup()
-	// }
+  goback() {
+    Actions.pop();
+  }
 
 
 
@@ -58,7 +58,7 @@ class LoginScreen extends Component {
           
 
 
-          <Text style={styles.welcome}> Login to Pizza-app!</Text>
+          <Text style={styles.welcome}> Register to Pizza-app!</Text>
           <TextInput
             value={this.state.username}
             onChangeText={(username) => this.setState({ username })}         
@@ -87,17 +87,12 @@ class LoginScreen extends Component {
 
             <TouchableOpacity 
               style={styles.userBtn}
-              onPress={this.signup}
+              onPress={this.goback}
             >
               <Text style={styles.btnTxt}>Sign up</Text>
             </TouchableOpacity>
 
-            {/* <TouchableOpacity 
-              style={styles.userBtn}
-              onPress={() => this.props.navigation.navigate('Signup')}
-            >
-              <Text style={styles.btnTxt}>Sign up</Text>
-            </TouchableOpacity> */}
+            
 
 
 
@@ -166,5 +161,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginScreen;
-
+export default SignupScreen;
