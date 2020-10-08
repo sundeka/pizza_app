@@ -27,21 +27,43 @@ const FrontPage = () => {
                 key={item.id}
             />
         )
-    } 
+    }
+    
+
+    //replaceAll-metodi jota käytetään hakualgoritmissa
+    function replaceAll(string, search, replace) {
+        string = string.toLowerCase();
+        return string.split(search).join(replace);
+    }
  
     async function fetchMenus(syote) {
         await fetch("https://pizzaapp-290908.ew.r.appspot.com/rest/db/getAllMenus")
         .then(parameter=>parameter.json())
         .then(anotherParam=>setMenus(anotherParam));
 
-        setEhdotusLista([]);
-        
-        //syote on array, joka sisältää käyttäjän antamat syötteet
+        //
+        //Hakualgoritmi
+        //
+
+        setEhdotusLista([]); //tyhjennetään lista joka kerta kun "Search for pizzas" -painiketta painetaan
+
         for (var i=0;i<menus.length;i++){
+
+            //luetaan kaikki täytteet yhteen stringiin, poistetaan null-arvot replaceAll-metodilla
+            var pizzanTaytteet = "";
+            pizzanTaytteet = menus[i].tayte1 + menus[i].tayte2 + menus[i].tayte3;
+            pizzanTaytteet = replaceAll(pizzanTaytteet, 'null', '')
+
+            //luetaan kaikki syötetyt hakuparametrit yhteen stringiing, poistetaan tyhjät arvot replaceAll-metodilla
+            var syotteet="";
             for (var j=0; j<syote.length;j++){
-                if (menus[i].tayte1 === syote[j] || menus[i].tayte2 === syote[j] || menus[i].tayte3 === syote[j]){
-                    setEhdotusLista(ehdotusLista=>[...ehdotusLista, menus[i]]);
-                }
+                syotteet+=syote[j];
+            }
+            syotteet = replaceAll(syotteet, 'null', '');
+
+            //jos pizza X sisältää kaikki käyttäjän syöttämät täytteet, se listataan sovellukseen
+            if (pizzanTaytteet.includes(syotteet)){
+                setEhdotusLista(ehdotusLista=>[...ehdotusLista, menus[i]]);
             }
         }
     };
