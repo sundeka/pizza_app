@@ -6,7 +6,7 @@ import FetchFillings from '../dbconn/FetchFillings.js';
 const FrontPage = () => {
     const [menus, setMenus] = useState([]); //tähän tallentuu koko menu mistä valitaan käyttäjän täytteisiin sopivat pizzat
     const [selectedId, setSelectedId] = useState(null)
-    const [ehdotusLista, setEhdotusLista] = useState([]); //tallenna tähän käyttäjän valitsemat täytteet
+    const [ehdotusLista, setEhdotusLista] = useState([]); //tallenna tähän pizzat jotka sopii käyttäjän valitsemiin täytteisiin
 
      const Item = ({ item, onPress, style }) => (
         <TouchableOpacity onPress={onPress} style={styles.itemi, style}>
@@ -16,7 +16,7 @@ const FrontPage = () => {
         </TouchableOpacity>
     ); 
 
-     const renderItem = ({ item }) => {
+    const renderItem = ({ item }) => {
         const backgroundColor = item.id === selectedId ? "#c44747" : "#ff6464";
 
         return (
@@ -27,6 +27,11 @@ const FrontPage = () => {
                 key={item.id}
             />
         )
+    }
+
+    const emptyList = () => {
+        setSelectedId(null);
+        setEhdotusLista([]);
     }
     
 
@@ -79,12 +84,12 @@ const FrontPage = () => {
                 <Text style={styles.titletext}>SELECT YOUR TOPPINGS</Text>
             </View>
             <View style={styles.decisions}>
-                <FetchFillings onAddToppings={fetchMenus}/>
+                <FetchFillings onAddToppings={fetchMenus} emptyList={emptyList}/>
             </View>
             <View style={styles.pizzalistdiv}>
                  <View style={styles.flatliststyle}>
                      <FlatList
-                        data={ehdotusLista} //vaihda
+                        data={ehdotusLista}
                         renderItem={renderItem}
                         keyExtractor={(item) => item.id}
                         extraData={selectedId}
@@ -124,13 +129,13 @@ const styles = StyleSheet.create({
 
     content: {
         flex: 10,
-        backgroundColor: '#ffae8f'
+        //backgroundColor: '#ffae8f'
     },
 
     titlediv: {
         backgroundColor: '#ffae8f',
         justifyContent: 'center',
-        flex: 1,
+        flex: .75,
     }, titletext: {
         fontSize: 30,
         alignSelf: 'center',
@@ -139,7 +144,6 @@ const styles = StyleSheet.create({
     },
 
     decisions: {
-        backgroundColor: '#ff6464',
         width: '90%',
         alignSelf: 'center',
         flex: 3,

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { View, Picker, Text, StyleSheet, Alert, Button } from 'react-native';
+import { View, Picker, Text, StyleSheet, Alert, Button, TouchableOpacity } from 'react-native';
 
 const FetchFillings = (props) => {
     const [fillings, setFillings] = useState([]);
@@ -23,6 +23,12 @@ const FetchFillings = (props) => {
         }
     }
 
+    const emptyList = () => {
+        props.emptyList();
+        addSelectedFillings([]);
+        setSelectedValue("Select a topping");
+    }
+
     useEffect(() => {
         fetchFillings();
     }, []);
@@ -41,13 +47,14 @@ const FetchFillings = (props) => {
                 )}
             </View>
             <View style={styles.buttondiv}>
-                <Button 
-                    style={styles.buttonstyle}
-                    title="SEARCH FOR PIZZAS"
-                    color="#851d41"
-                    onPress={()=>props.onAddToppings(selectedFillings)}
-                />
-            </View>     
+
+                <TouchableOpacity style={styles.button} color="#851d41" onPress={()=>props.onAddToppings(selectedFillings)}>
+                    <Text style={styles.buttontext}>SEARCH FOR PIZZAS</Text>
+                </TouchableOpacity> 
+
+                <Button title="CLEAR LIST" color="#db3056" onPress={emptyList}/>
+
+            </View>
         </View>
     );
 }
@@ -58,7 +65,7 @@ const styles = StyleSheet.create({
     },
     
     searchbar: {
-        flex: 2,
+        flex: 1,
         backgroundColor: '#ff6464',
     },
 
@@ -67,7 +74,7 @@ const styles = StyleSheet.create({
         alignContent: 'stretch',
         backgroundColor: '#db3056',
         width: '100%',
-        flex: 3,
+        flex: 2,
         flexWrap: 'wrap',
         paddingTop: '3%',
         paddingLeft: '3%',
@@ -79,13 +86,20 @@ const styles = StyleSheet.create({
     },
 
     buttondiv: {
-        width: '100%',
         alignSelf: 'center',
+        alignContent: 'stretch',
         justifyContent: 'center',
-        flex: 2,
-        backgroundColor: '#ffae8f'
-    }, buttonstyle: {
-        alignSelf: 'center',
+        width: '100%',
+        flex: 1,
+        flexWrap: 'wrap',
+    }, button: {
+        backgroundColor: '#851d41',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '75%',
+        width: '70%',
+    }, buttontext: {
+        color: 'white'
     }
 })
 
