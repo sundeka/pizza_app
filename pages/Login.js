@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image} from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image } from 'react-native';
+// import { Actions } from 'react-native-router-flux';
 
 
 
-const userInfo = {username: 'admin', password: 'password'}
+const userInfo = {username: 'admin', password: '123'}
 
-class LoginScreen extends Component {
-// export default class FirstPage extends Component{
-    static navigationOptions = {
-    header: null
-  }
+
+export default class FirstPage extends React.Component{
+ //class LoginScreen extends Component {
+     static navigationOptions = {
+     header: null
+ }
 
   constructor(props) {
     super(props);  
@@ -112,7 +113,7 @@ class LoginScreen extends Component {
       if(userInfo.username === this.state.username && userInfo.password === this.state.password) {
         // alert('Logged in');
         await AsyncStorage.setItem('isLoggedIn', '1');
-        this.props.navigation.navigate('Details');
+        this.props.navigation.navigate('Fillings');
       } else {
         alert('Username or Password is incorrect');
       } 
@@ -166,5 +167,22 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginScreen;
+//export default LoginScreen;
 
+
+
+
+
+
+
+// import React , {Component} from 'react';
+// import { View } from 'react-native';
+// import { } from 'react-navigation';
+
+// export class LoginPage extends Component {
+//   render() {
+//     return (
+//         <View 
+//     );
+//   }
+// }

@@ -1,17 +1,19 @@
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import {ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View} from 'react-native';
-import HomeScreen from './pages/Login';
-import DetailsScreen from './pages/Details';
+import FirstPage from './pages/Login';
+import SecondPage from './pages/Fillings';
+// import FirstPage from './pages/Login'
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+//import FirstPage from './pages/Login';
 
 
 
 const RootStack = createStackNavigator(
   {
-    HomePage: HomeScreen,
-    Details: DetailsScreen,
+    HomePage: FirstPage,
+    Fillings: SecondPage,
     
     
   },
@@ -29,7 +31,7 @@ const RootStack = createStackNavigator(
     }
   },
 );
-const AuthStack = createStackNavigator({Home: HomeScreen})
+const AuthStack = createStackNavigator({Home: FirstPage})
 
 class AuthLoadingScreen extends Component{
   constructor(props){
@@ -89,6 +91,7 @@ export default createAppContainer(createSwitchNavigator(
 
 
 // import React, { Component } from 'react';
+// import {View, StyleSheet} from 'react-native'
 // import { createAppContainer } from 'react-navigation';
 // import { createStackNavigator} from 'react-navigation-stack';
 
