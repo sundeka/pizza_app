@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
@@ -9,7 +8,6 @@ export default function App() {
     <FrontPage/>
   );
 }
-=======
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
 import {ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View, Button} from 'react-native';
@@ -194,4 +192,3 @@ export default createAppContainer(createSwitchNavigator(
 
 
 
->>>>>>> 2877b9d78c0961ae0f22eb97202a0de44d246f9a
