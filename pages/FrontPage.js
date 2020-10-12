@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Button, TouchableOpacity, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Button, TouchableOpacity, FlatList, Image, Alert } from 'react-native';
 
 import FetchFillings from '../dbconn/FetchFillings.js';
 
@@ -62,6 +62,11 @@ const FrontPage = () => {
         //
         //Hakualgoritmi
         //
+
+        if (syote.length==0){
+            Alert.alert("Error!", "Please select at least one filling.")
+            return;
+        }
 
         setEhdotusLista([]); //tyhjennetään lista joka kerta kun "Search for pizzas" -painiketta painetaan
 
