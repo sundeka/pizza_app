@@ -4,9 +4,10 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator} from 'react-navigation-stack';
 
 import SecondPage from './pages/Orderpage';
-import FirstPage from './pages/Firstpage';
+import Summarypage from './pages/Summarypage';
 
-import FrontPage from './pages/Orderpage2.js'
+//import FrontPage from './pages/Orderpage2.js'
+import FrontPage from './pages/Summarypage.js'
 
 export default function App() {
   return(

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Button, Text, Alert } from 'react-native';
+import { StyleSheet, View, TextInput, Button, Text, Alert, TouchableOpacity} from 'react-native';
 export default class Project extends Component {
 constructor() {
     super()
     this.state = {
-      PizzaName: '',
-      PricePrice: '',
+      PizzaName: 'Special Secret Pizza',
+      PricePrice: 9.97,
       FirstName: '',
       LastName: '',
       EmailEmail: '',
@@ -24,11 +24,8 @@ constructor() {
     body: JSON.stringify({
   
       pizza: this.state.PizzaName,
-  
       price: this.state.PricePrice,
-  
       firstname: this.state.FirstName,
-
       lastname: this.state.LastName,
       email: this.state.EmailEmail,
       phonenumber: this.state.PhoneNumber,
@@ -40,7 +37,12 @@ constructor() {
         .then((responseJson) => {
   
   // Showing response message coming from server after inserting records.
-          Alert.alert(responseJson);
+         Alert.alert(responseJson);
+
+
+
+         //Alert.alert(JSON.stringify(responseJson));
+
   
         }).catch((error) => {
           console.error(error);
@@ -49,21 +51,26 @@ constructor() {
   render() {
     return (
 <View style = { styles.MainContainer } >
-        <Text>Fill your info</Text>
-  
-        <TextInput
+        <Text style={styles.titleText} >Fill your info</Text>
+        <Text></Text>
+        <Text style={styles.titleBold}>Our Pizza: </Text>
+        <Text style={styles.textTest}>{this.state.PizzaName}</Text>
+        <Text style={styles.titleBold}>Tolta price: </Text>
+        <Text style={styles.textTest}>{this.state.PricePrice} €</Text>
+
+        {/* <TextInput
           placeholder='Enter Pizza Name'
           onChangeText={pizza => this.setState({PizzaName : pizza})}
           underlineColorAndroid='transparent'
           style = { styles.TextInputStyleClass }
-          />
-        <TextInput
+          /> */}
+        {/* <TextInput
           placeholder='Enter Price'
           onChangeText={price => this.setState({PricePrice : price})}
           underlineColorAndroid='transparent'
           style = { styles.TextInputStyleClass }
 
-          />
+          /> */}
         <TextInput
           placeholder='Enter First Name'
           onChangeText={firstname => this.setState({FirstName : firstname})}
@@ -99,6 +106,7 @@ constructor() {
           style = { styles.TextInputStyleClass }
 
           />
+
         <Button title='Click Here To Order' onPress={this.OrderFunction} color='#2196F3' />
       
   
@@ -142,9 +150,18 @@ const styles = StyleSheet.create(
    
       },
    
-      TextStyle:
+      titleText:
       {
-          fontSize: 18
+          fontSize: 25,
+          fontWeight: 'bold'
+      },
+      titleBold:
+      {
+          fontWeight: 'bold'
+      },
+      textTest:
+      {
+          paddingBottom: 18,
       },
       FontStyle:
       {
