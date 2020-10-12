@@ -6,8 +6,8 @@ import { createStackNavigator} from 'react-navigation-stack';
 import SecondPage from './pages/Orderpage';
 import Summarypage from './pages/Summarypage';
 
-//import FrontPage from './pages/Orderpage2.js'
-import FrontPage from './pages/Summarypage.js'
+import FrontPage from './pages/Orderpage2.js';
+//import FrontPage from './pages/Summarypage.js'
 
 export default function App() {
   return(
