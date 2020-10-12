@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image} from 'react-native';
 // import { Actions } from 'react-native-router-flux';
 
-
-
-
-
 export default class SignupPage extends React.Component{
   //   static navigationOptions = {
   //   header: null

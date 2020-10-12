@@ -1,16 +1,9 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image, navigation} from 'react-native';
-// import { createStackNavigator } from 'react-navigation-stack';
-// import { Actions } from 'react-native-router-flux';
-
-
-
 
 const userInfo = {username: 'admin', password: '123'}
 
-
 export default class FirstPage extends React.Component{
- //class LoginScreen extends Component {
      static navigationOptions = {
      header: null
  }
@@ -23,35 +16,18 @@ export default class FirstPage extends React.Component{
     };
   }
 
-  // signup() {
-	// 	Actions.signup()
-	// }
-
-
-
   render() {   
       return (
         <View style={styles.container}>
-
-      {/* <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
-       style={{width: 400, height: 400}} />   */}
-
-          
           <Image 
               source={require('../assets/pizzalogo14.png')} 
               style={{ width: 205, height: 160, marginBottom: 30}}
           />  
 
           <StatusBar
-              backgroundColor="#A32706"
+              backgroundColor="#851d41"
               barStyle="light-content"
           />
-
-          
-          
-              
-          
-
 
           <Text style={styles.welcome}> Login to Pizza-app!</Text>
           <TextInput
@@ -69,43 +45,21 @@ export default class FirstPage extends React.Component{
             placeholder="Password"
             secureTextEntry          
           />
-
-          
+   
           <View style={styles.BtnContainer}>
             <TouchableOpacity 
               style={styles.userBtn} 
               onPress={this._login}
-              // onPress={() => this.props.navigation.navigate('Details')}
             >
               <Text style={styles.btnTxt}>Login</Text>
             </TouchableOpacity>
 
-            {/* <TouchableOpacity 
-              style={styles.userBtn}
-              onPress={this.signup}
-            >
-              <Text style={styles.btnTxt}>Sign up</Text>
-            </TouchableOpacity> */}
-
             <TouchableOpacity 
               style={styles.userBtn}
-              //onPress = {() => this.props.navigation.navigate('Signup')}
               onPress={() => navigation.navigate('Signup')}
             >
-                <Text style={styles.btnTxt}>Signupp</Text>
+                <Text style={styles.btnTxt}>Sign up</Text>
             </TouchableOpacity>
-
-            {/* <TouchableOpacity 
-              style={styles.userBtn}
-              onPress={() => this.props.navigation.navigate('Signup')}
-            >
-              <Text style={styles.btnTxt}>Sign up</Text>
-            </TouchableOpacity> */}
-
-
-
-
-
           </View>  
         </View>
       );
@@ -113,25 +67,18 @@ export default class FirstPage extends React.Component{
 
     _login = async() => {
       if(userInfo.username === this.state.username && userInfo.password === this.state.password) {
-        // alert('Logged in');
         await AsyncStorage.setItem('isLoggedIn', '1');
         this.props.navigation.navigate('Fillings');
       } else {
-        alert('Username or Password is incorrect');
-      } 
-      
+        alert('Username or password is incorrect.');
+      }  
     }
-  
-
-
-
-
   }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#A32706',
+    backgroundColor: '#ffae8f',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -140,12 +87,12 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     margin: 10,
-    color: '#fff',
+    color: '#851d41',
     marginBottom: 30,
   },
   input: {
     width: "90%",
-    backgroundColor: "#fff",
+    backgroundColor: "#851d41",
     padding: 15,
     marginBottom: 10,
   },
@@ -153,26 +100,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     width: "90%",
-
   },
   userBtn: {
-    backgroundColor: "#FFD700",
+    backgroundColor: "#851d41",
     padding: 15,
     width: "45%",
-    // fontSize: 18,
-    // textAlign: "center",
   },
   btnTxt: {
     fontSize: 18,
-    textAlign: "center",
-    
+    color: "#fff",
+    textAlign: "center",   
   }
 });
-
-//export default LoginScreen;
-
-
-// ylempi koodi toimii
-
-
-
