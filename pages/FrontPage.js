@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Button, TouchableOpacity, FlatList, Image, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, SafeAreaView, Button, TouchableOpacity, FlatList, Image } from 'react-native';
 
 import FetchFillings from '../dbconn/FetchFillings.js';
 
@@ -7,6 +7,11 @@ const FrontPage = () => {
     const [menus, setMenus] = useState([]); //tähän tallentuu koko menu mistä valitaan käyttäjän täytteisiin sopivat pizzat
     const [selectedId, setSelectedId] = useState(null)
     const [ehdotusLista, setEhdotusLista] = useState([]); //tallenna tähän pizzat jotka sopii käyttäjän valitsemiin täytteisiin
+
+    const updateStatus = ( id, rest, pizza, price ) => {
+        setSelectedId(id)
+        console.log("Selected restaurant: "+rest+"\nSelected pizza: "+pizza+"\nPrice of pizza: "+price+"\n")
+    };
 
      const Item = ({ item, onPress, style }) => (
         <TouchableOpacity onPress={onPress} style={styles.itemi, style}>
@@ -22,7 +27,7 @@ const FrontPage = () => {
         return (
             <Item
                 item={item}
-                onPress={() => setSelectedId(item.id)}
+                onPress={() => updateStatus(item.id, item.restaurant, item.pizzaname, item.price)}
                 style={{ backgroundColor }}
                 key={item.id}
             />
