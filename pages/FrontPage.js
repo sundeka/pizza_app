@@ -10,7 +10,14 @@ const FrontPage = () => {
 
     const updateStatus = ( id, rest, pizza, price ) => {
         setSelectedId(id)
-        console.log("Selected restaurant: "+rest+"\nSelected pizza: "+pizza+"\nPrice of pizza: "+price+"\n")
+        const pizzaData = [
+            {
+                restaurant: rest,
+                selectedPizza: pizza,
+                pizzaPrice: price,
+            }
+        ]
+        console.log(pizzaData)
     };
 
      const Item = ({ item, onPress, style }) => (
