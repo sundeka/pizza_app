@@ -1,8 +1,9 @@
 import 'react-native-gesture-handler';
 import React, {Component} from 'react';
-import {ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View, Button} from 'react-native';
 import FirstPage from './pages/Login';
 import SecondPage from './pages/Fillings';
+// import SignupPage from './pages/Signup';
 // import FirstPage from './pages/Login'
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
@@ -13,7 +14,9 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 const RootStack = createStackNavigator(
   {
     HomePage: FirstPage,
+    //RegisterPage: SignupPage,
     Fillings: SecondPage,
+
     
     
   },
@@ -51,6 +54,7 @@ class AuthLoadingScreen extends Component{
       const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
       this.props.navigation.navigate(isLoggedIn !== '1'? 'Auth' : 'App');
   }
+  
 
 }
 
@@ -77,6 +81,73 @@ export default createAppContainer(createSwitchNavigator(
 
 
 
+// toimii ylempi koodi
+
+
+
+
+
+// import { createAppContainer } from 'react-navigation';
+// import { createStackNavigator } from 'react-navigation-stack';
+// import LoginScreen from './src/screens/LoginScreen';
+// import HomeScreen from './src/screens/HomeScreen';
+// import CreateAccountScreen from './src/screens/CreateAccountScreen';
+
+// const AppNavigator = createStackNavigator(
+//   {
+//     Home: HomeScreen,
+//     Login: LoginScreen,
+//     CreateAccount: CreateAccountScreen,
+//   },
+//   {
+//     initialRouteName: 'Home',
+//   },
+// );
+
+// export default createAppContainer(AppNavigator);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import React from 'react';
 // import { View, StyleSheet } from 'react-native';
 
@@ -95,7 +166,7 @@ export default createAppContainer(createSwitchNavigator(
 // import { createAppContainer } from 'react-navigation';
 // import { createStackNavigator} from 'react-navigation-stack';
 
-// import SecondPage from './pages/Details';
+// import SecondPage from './pages/Fillings';
 // import FirstPage from './pages/Login';
 
 // const App = createStackNavigator({

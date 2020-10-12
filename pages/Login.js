@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image, navigation} from 'react-native';
+// import { createStackNavigator } from 'react-navigation-stack';
 // import { Actions } from 'react-native-router-flux';
+
 
 
 
@@ -34,11 +36,7 @@ export default class FirstPage extends React.Component{
       {/* <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
        style={{width: 400, height: 400}} />   */}
 
-          {/* <Image 
-              source={require('./assets/pizzaa.png')} 
-              style={{ width: 200, height: 130 }}
-          /> */}
-
+          
           <Image 
               source={require('../assets/pizzalogo14.png')} 
               style={{ width: 205, height: 160, marginBottom: 30}}
@@ -49,11 +47,7 @@ export default class FirstPage extends React.Component{
               barStyle="light-content"
           />
 
-          {/* <View style={styles.picture}>
-              <Image source={require('..assets/pizza.png')} />
-          </View>
-           */}
-
+          
           
               
           
@@ -86,11 +80,19 @@ export default class FirstPage extends React.Component{
               <Text style={styles.btnTxt}>Login</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
+            {/* <TouchableOpacity 
               style={styles.userBtn}
               onPress={this.signup}
             >
               <Text style={styles.btnTxt}>Sign up</Text>
+            </TouchableOpacity> */}
+
+            <TouchableOpacity 
+              style={styles.userBtn}
+              //onPress = {() => this.props.navigation.navigate('Signup')}
+              onPress={() => navigation.navigate('Signup')}
+            >
+                <Text style={styles.btnTxt}>Signupp</Text>
             </TouchableOpacity>
 
             {/* <TouchableOpacity 
@@ -170,19 +172,7 @@ const styles = StyleSheet.create({
 //export default LoginScreen;
 
 
+// ylempi koodi toimii
 
 
 
-
-
-// import React , {Component} from 'react';
-// import { View } from 'react-native';
-// import { } from 'react-navigation';
-
-// export class LoginPage extends Component {
-//   render() {
-//     return (
-//         <View 
-//     );
-//   }
-// }

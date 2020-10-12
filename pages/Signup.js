@@ -1,42 +1,69 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image} from 'react-native';
-import { Actions } from 'react-native-router-flux';
+// import { Actions } from 'react-native-router-flux';
 
 
 
 
 
-class SignupScreen extends Component {
-// export default class FirstPage extends Component{
-    static navigationOptions = {
-    header: null
-  }
+export default class SignupPage extends React.Component{
+  //   static navigationOptions = {
+  //   header: null
+  // }
 
-  constructor(props) {
-    super(props);  
-    this.state = {
-      username: '',
-      password: '',
-    };
-  }
+  // constructor(props) {
+  //   super(props);  
+  //   this.state = {
+  //     username: '',
+  //     password: '',
+  //   };
+  // }
 
-  goback() {
-    Actions.pop();
-  }
+  // goback() {
+  //   Actions.pop();
+  // }
+  
 
+
+//   createNewUser = async (values) => {
+//     try {
+//         const response =  await this.props.dispatch(createNewUser(values));
+//         if (!response.success) {
+//             throw response;
+//         }
+//     } catch (error) {
+//         const newError = new ErrorUtils(error, "Signup Error");
+//         newError.showAlert();
+//     }
+// }
+
+// onSubmit = (values) => {
+//     this.createNewUser(values);
+// }
+
+// renderTextInput = (field) => {
+//       const {meta: {touched, error}, label, secureTextEntry, maxLength, keyboardType, placeholder, input: {onChange, ...restInput}} = field;
+//       return (
+//           <View>
+//             <InputText
+//                 onChangeText={onChange}
+//                 maxLength={maxLength}
+//                 placeholder={placeholder}
+//                 keyboardType={keyboardType}
+//                 secureTextEntry={secureTextEntry}
+//                 label={label}
+//                 {...restInput} />
+//           {(touched && error) && <Text style={styles.errorText}>{error}</Text>}
+//           </View>
+//       );
+// }
 
 
   render() {   
       return (
         <View style={styles.container}>
 
-      {/* <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
-       style={{width: 400, height: 400}} />   */}
-
-          {/* <Image 
-              source={require('./assets/pizzaa.png')} 
-              style={{ width: 200, height: 130 }}
-          /> */}
+     
 
           <Image 
               source={require('../assets/pizzalogo14.png')} 
@@ -48,23 +75,21 @@ class SignupScreen extends Component {
               barStyle="light-content"
           />
 
-          {/* <View style={styles.picture}>
-              <Image source={require('..assets/pizza.png')} />
-          </View>
-           */}
-
+          
           
               
           
 
 
           <Text style={styles.welcome}> Register to Pizza-app!</Text>
+
           <TextInput
             value={this.state.username}
             onChangeText={(username) => this.setState({ username })}         
             style={styles.input}
             placeholder="Username"
             autoCapitalize="none"
+            onSubmitEditing = {() => this.username.focus()}
           />
           
           <TextInput
@@ -72,24 +97,30 @@ class SignupScreen extends Component {
             onChangeText={(password) => this.setState({ password })}
             style={styles.input}
             placeholder="Password"
-            secureTextEntry          
+            secureTextEntry   
+            ref = {(input) }       
           />
 
           
           <View style={styles.BtnContainer}>
-            <TouchableOpacity 
+            {/* <TouchableOpacity 
               style={styles.userBtn} 
               onPress={this._login}
               // onPress={() => this.props.navigation.navigate('Details')}
             >
               <Text style={styles.btnTxt}>Login</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+
+            {/* <TouchableOpacity style={styles.userBtn} 
+            >
+              <Text style={styles.btnTxt}>Signup</Text>
+            </TouchableOpacity> */}
 
             <TouchableOpacity 
               style={styles.userBtn}
-              onPress={this.goback}
+              onPress = {() => this.props.navigation.navigate('Login')}
             >
-              <Text style={styles.btnTxt}>Sign up</Text>
+              <Text style={styles.btnTxt}>Already an account?</Text>
             </TouchableOpacity>
 
             
@@ -161,4 +192,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignupScreen;
+
