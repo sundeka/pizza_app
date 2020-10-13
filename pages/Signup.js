@@ -6,7 +6,9 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, Stat
 
 
 export default class SignupPage extends React.Component{
-
+  static defaultProps = {
+    name: 'signup'
+  }
 
 
   constructor(props) {
@@ -17,15 +19,54 @@ export default class SignupPage extends React.Component{
     };
   }
 
- 
-  
+  saveData =async()=>{
+    const {username,password} = this.state;
 
-       
-    
+    //save data with asyncstorage
+    let loginDetails={
+        username: username,
+        password: password
+    }
 
+    if(this.props.name == 'signup')
+    {
+        AsyncStorage.setItem('loginDetails', JSON.stringify(loginDetails));
 
+        Keyboard.dismiss();
+        alert("You successfully registered. Username: " + username + ' password: ' + password);
+        this.login();
+    }
+    else if(this.props.name == 'Login')
+    {
+        try{
+            let loginDetails = await AsyncStorage.getItem('loginDetails');
+            let ld = JSON.parse(loginDetails);
 
+            if (ld.username != null && ld.password != null)
+            {
+                if (ld.username == username && ld.password == password)
+                {
+                   alert('Loggen in!');
+                    
+                }
+                else
+                {
+                    alert('Username and Password does not exist!');
+                }
+            }
 
+        }catch(error)
+        {
+            alert(error);
+        }
+    }
+}
+
+showData = async()=>{
+    let loginDetails = await AsyncStorage.getItem('loginDetails');
+    let ld = JSON.parse(loginDetails);
+    alert('username: '+ ld.username + ' ' + 'password: ' + ld.password);
+}
 
 
   render() {   
@@ -49,7 +90,7 @@ export default class SignupPage extends React.Component{
             placeholder="Username"
             autoCapitalize="none"
             placeholderTextColor = "#fff"
-            
+            onSubmitEditing={()=> this.password.focus()}
           />
           
           <TextInput
@@ -59,7 +100,7 @@ export default class SignupPage extends React.Component{
             placeholder="Password"
             secureTextEntry 
             placeholderTextColor = "#fff"    
-               
+            ref={(input) => this.password = input}   
           />
    
           <View style={styles.BtnContainer}>

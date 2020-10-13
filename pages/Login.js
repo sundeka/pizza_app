@@ -5,6 +5,9 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, Stat
 const userInfo = {username: 'admin', password: '123'}
 
 export default class FirstPage extends React.Component{
+  static defaultProps = {
+    name: 'Login'
+  }
      
 
   constructor(props) {
@@ -24,7 +27,7 @@ export default class FirstPage extends React.Component{
         password: password
     }
 
-    if(this.props.type !== 'Login')
+    if(this.props.name == 'signup')
     {
         AsyncStorage.setItem('loginDetails', JSON.stringify(loginDetails));
 
@@ -32,7 +35,7 @@ export default class FirstPage extends React.Component{
         alert("You successfully registered. Username: " + username + ' password: ' + password);
         this.login();
     }
-    else if(this.props.type == 'Login')
+    else if(this.props.name == 'Login')
     {
         try{
             let loginDetails = await AsyncStorage.getItem('loginDetails');
@@ -42,8 +45,8 @@ export default class FirstPage extends React.Component{
             {
                 if (ld.username == username && ld.password == password)
                 {
-                   alert('Loggen in!');
-                    
+                   await AsyncStorage.setItem('isLoggedIn', '1');
+                   this.props.navigation.navigate('Fillings');
                 }
                 else
                 {
@@ -88,6 +91,7 @@ showData = async()=>{
             placeholder="Username"
             autoCapitalize="none"
             placeholderTextColor = "#fff"
+            onSubmitEditing={()=> this.password.focus()}
           />
           
           <TextInput
@@ -96,15 +100,16 @@ showData = async()=>{
             style={styles.input}
             placeholder="Password"
             secureTextEntry   
-            placeholderTextColor = "#fff"      
+            placeholderTextColor = "#fff"  
+            ref={(input) => this.password = input}    
           />
    
           <View style={styles.BtnContainer}>
             <TouchableOpacity 
               style={styles.userBtn} 
-              onPress={this._login}
+              onPress={this.saveData}
             >
-              <Text style={styles.btnTxt}>{this.props.type}Login</Text>
+              <Text style={styles.btnTxt}>Login</Text>
             </TouchableOpacity>
 
             
