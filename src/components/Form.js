@@ -45,7 +45,7 @@ export default class Form extends Component {
                 {
                     if (ld.email == email && ld.password == password)
                     {
-                       
+                       alert('Loggen in!')
                         
                     }
                     else

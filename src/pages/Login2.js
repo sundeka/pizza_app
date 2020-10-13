@@ -14,7 +14,7 @@ import {Actions} from 'react-native-router-flux';
 export default class Login2 extends Component {
 
 	signup() {
-		Actions.signup()
+		Actions.signup2()
 	}
 
 	render() {
