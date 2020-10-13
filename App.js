@@ -3,13 +3,15 @@ import React, {Component} from 'react';
 import {ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View, Button} from 'react-native';
 import FirstPage from './pages/Login';
 import SecondPage from './pages/Fillings';
+import Orderpage from './pages/Orderpage2';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 const RootStack = createStackNavigator(
   {
     HomePage: FirstPage,
-    Fillings: SecondPage,  
+    Fillings: SecondPage,
+    Order: Orderpage,
   },
   {
     defaultNavigationOptions: {
