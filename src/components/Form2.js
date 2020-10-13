@@ -10,29 +10,29 @@ import {
 export default class Form extends Component {
 
 
-    constructor(props){
-        super(props);
-        this.state={
-            email:'',
-            password: ''
-        }
-    }
- 
-    saveData =async()=>{
-        const {email,password} = this.state;
- 
+    constructor(props) {
+        super(props);  
+        this.state = {
+          username: '',
+          password: '',
+        };
+      }
+    
+      saveData =async()=>{
+        const {username,password} = this.state;
+    
         //save data with asyncstorage
         let loginDetails={
-            email: email,
+            username: username,
             password: password
         }
- 
+    
         if(this.props.type !== 'Login')
         {
             AsyncStorage.setItem('loginDetails', JSON.stringify(loginDetails));
- 
+    
             Keyboard.dismiss();
-            alert("You successfully registered. Email: " + email + ' password: ' + password);
+            alert("You successfully registered. Username: " + username + ' password: ' + password);
             this.login();
         }
         else if(this.props.type == 'Login')
@@ -40,43 +40,45 @@ export default class Form extends Component {
             try{
                 let loginDetails = await AsyncStorage.getItem('loginDetails');
                 let ld = JSON.parse(loginDetails);
- 
-                if (ld.email != null && ld.password != null)
+    
+                if (ld.username != null && ld.password != null)
                 {
-                    if (ld.email == email && ld.password == password)
+                    if (ld.username == username && ld.password == password)
                     {
-                       alert('Loggen in!')
+                       alert('Loggen in!');
+                       
                         
                     }
                     else
                     {
-                        alert('Email and Password does not exist!');
+                        alert('Username and Password does not exist!');
                     }
                 }
- 
+    
             }catch(error)
             {
                 alert(error);
             }
         }
     }
- 
+    
     showData = async()=>{
         let loginDetails = await AsyncStorage.getItem('loginDetails');
         let ld = JSON.parse(loginDetails);
-        alert('email: '+ ld.email + ' ' + 'password: ' + ld.password);
+        alert('username: '+ ld.username + ' ' + 'password: ' + ld.password);
     }
+
+
 
 	render(){
 		return(
 			<View style={styles.container}>
                 <TextInput style={styles.inputBox}
-                onChangeText={(email) => this.setState({email})}
+                onChangeText={(username) => this.setState({username})}
                 underlineColorAndroid='rgba(0,0,0,0)' 
-                placeholder="Email"
+                placeholder="Username"
                 placeholderTextColor = "#002f6c"
                 selectionColor="#fff"
-                keyboardType="email-address"
                 onSubmitEditing={()=> this.password.focus()}/>
                 
                 <TextInput style={styles.inputBox}

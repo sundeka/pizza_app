@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image, navigation} from 'react-native';
-import {Actions} from 'react-native-router-flux';
+
 
 const userInfo = {username: 'admin', password: '123'}
 
@@ -15,13 +15,61 @@ export default class FirstPage extends React.Component{
     };
   }
 
-  signup() {
-		Actions.signup2()
-  }
+  saveData =async()=>{
+    const {username,password} = this.state;
+
+    //save data with asyncstorage
+    let loginDetails={
+        username: username,
+        password: password
+    }
+
+    if(this.props.type !== 'Login')
+    {
+        AsyncStorage.setItem('loginDetails', JSON.stringify(loginDetails));
+
+        Keyboard.dismiss();
+        alert("You successfully registered. Username: " + username + ' password: ' + password);
+        this.login();
+    }
+    else if(this.props.type == 'Login')
+    {
+        try{
+            let loginDetails = await AsyncStorage.getItem('loginDetails');
+            let ld = JSON.parse(loginDetails);
+
+            if (ld.username != null && ld.password != null)
+            {
+                if (ld.username == username && ld.password == password)
+                {
+                   alert('Loggen in!');
+                    
+                }
+                else
+                {
+                    alert('Username and Password does not exist!');
+                }
+            }
+
+        }catch(error)
+        {
+            alert(error);
+        }
+    }
+}
+
+showData = async()=>{
+    let loginDetails = await AsyncStorage.getItem('loginDetails');
+    let ld = JSON.parse(loginDetails);
+    alert('username: '+ ld.username + ' ' + 'password: ' + ld.password);
+}
+
+  
   
   render() {   
       return (
         <View style={styles.container}>
+          
           <Image 
               source={require('../assets/pizzalogo14.png')} 
               style={{ width: 205, height: 160, marginTop: 30, marginBottom: 30}}
@@ -39,6 +87,7 @@ export default class FirstPage extends React.Component{
             style={styles.input}
             placeholder="Username"
             autoCapitalize="none"
+            placeholderTextColor = "#fff"
           />
           
           <TextInput
@@ -46,7 +95,8 @@ export default class FirstPage extends React.Component{
             onChangeText={(password) => this.setState({ password })}
             style={styles.input}
             placeholder="Password"
-            secureTextEntry          
+            secureTextEntry   
+            placeholderTextColor = "#fff"      
           />
    
           <View style={styles.BtnContainer}>
@@ -54,7 +104,7 @@ export default class FirstPage extends React.Component{
               style={styles.userBtn} 
               onPress={this._login}
             >
-              <Text style={styles.btnTxt}>Login</Text>
+              <Text style={styles.btnTxt}>{this.props.type}Login</Text>
             </TouchableOpacity>
 
             
@@ -62,7 +112,7 @@ export default class FirstPage extends React.Component{
 
           <View style={styles.signupTextCont}>
 					<Text style={styles.signupText}>Don't have an account yet?</Text>
-					<TouchableOpacity onPress={this.signup}><Text style={styles.signupButton}> Signup</Text></TouchableOpacity>
+					<TouchableOpacity onPress={this._Signup}><Text style={styles.signupButton}> Signup</Text></TouchableOpacity>
 				</View>
 
         </View>
@@ -77,6 +127,13 @@ export default class FirstPage extends React.Component{
         alert('Username or password is incorrect.');
       }  
     }
+
+    _Signup = async() => {
+      this.props.navigation.navigate('Signup');
+    }
+
+
+
   }
 
 const styles = StyleSheet.create({

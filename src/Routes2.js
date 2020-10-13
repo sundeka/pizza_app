@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {Router, Stack, Scene} from 'react-native-router-flux';
 import Form from './components/Form';
 
-import Login2 from './pages/Login2';
-import Signup2 from './pages/Signup2';
+import Login2 from './pages2/Login2';
+import Signup2 from './pages2/Signup2';
 //import Fillings2 from './pages/Fillings2';
 //<Scene key="fillings2" component={Fillings2} title="fillings"/>
 

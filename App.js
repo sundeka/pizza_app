@@ -3,15 +3,19 @@ import React, {Component} from 'react';
 import {ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View, Button} from 'react-native';
 import FirstPage from './pages/Login';
 import SecondPage from './pages/Fillings';
+import Orderpage from './pages/Orderpage2';
 import SignupPage from './pages/Signup';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
+
 const RootStack = createStackNavigator(
   {
-    HomePage: FirstPage,
+    Login: FirstPage,
+    Fillings: SecondPage,
+    Order: Orderpage,
     Signup: SignupPage,
-    Fillings: SecondPage,  
+
   },
   {
     defaultNavigationOptions: {
@@ -108,7 +112,7 @@ export default createAppContainer(createSwitchNavigator(
 // } from 'react-native';
 
 
-// import Routes from './src/Routes';
+// import Routes2 from './src/Routes2';
 
 // export default class App extends Component {
 //   render() {

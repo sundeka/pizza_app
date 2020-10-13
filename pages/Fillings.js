@@ -542,27 +542,25 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Button, TouchableOpacity, FlatList, Image, } from 'react-native';
 import FetchFillings from '../dbconn/FetchFillings.js';
 
-    const SecondPage = () => {
-
-        const [menus, setMenus] = useState([]); //tähän tallentuu koko menu mistä valitaan käyttäjän täytteisiin sopivat pizzat
+    const SecondPage = (props) => {
+        const [menus, setMenus] = useState([]);
         const [selectedId, setSelectedId] = useState(null)
-        const [ehdotusLista, setEhdotusLista] = useState([]); //tallenna tähän pizzat jotka sopii käyttäjän valitsemiin täytteisiin
+        const [ehdotusLista, setEhdotusLista] = useState([]);
+
+        //Arvot, jotka syötetään tilaussivulle
+        const [restaurant, setRestaurant] = useState("No restaurant selected.")
+        const [pizza, setPizza] = useState("No pizza selected.")
+        const [price, setPrice] = useState("Price not known.")
     
         const updateStatus = ( id, rest, pizza, price ) => {
-            setSelectedId(id)
-            const pizzaData =
-                {
-                    restaurant: rest,
-                    selectedPizza: pizza,
-                    pizzaPrice: price,
-                }
-            console.log(pizzaData.restaurant)
-            console.log(pizzaData.selectedPizza)
-            console.log(pizzaData.pizzaPrice)
+            setSelectedId(id);
+            setRestaurant(rest);
+            setPizza(pizza);
+            setPrice(price);
         };
     
          const Item = ({ item, onPress, style }) => (
@@ -663,6 +661,7 @@ import FetchFillings from '../dbconn/FetchFillings.js';
                         style={styles.buttonstyle}
                         title="CHOOSE SELECTED"
                         color="#851d41"
+                        onPress={() => props.navigation.navigate('Order', {restaurant: restaurant, pizza: pizza, price: price})}
                     />
                 </View>
             </View>
@@ -749,4 +748,5 @@ import FetchFillings from '../dbconn/FetchFillings.js';
         }
     
     });
+    
     export default SecondPage;
