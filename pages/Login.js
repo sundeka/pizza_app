@@ -24,7 +24,7 @@ export default class FirstPage extends React.Component{
         <View style={styles.container}>
           <Image 
               source={require('../assets/pizzalogo14.png')} 
-              style={{ width: 205, height: 160, marginBottom: 30}}
+              style={{ width: 205, height: 160, marginTop: 30, marginBottom: 30}}
           />  
 
           <StatusBar
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 10,
     fontSize: 15,
+    borderRadius: 30,
   },
   BtnContainer: {
     flexDirection: "row",
@@ -111,6 +112,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#851d41",
     padding: 15,
     width: "100%",
+    borderRadius: 30,
   },
   btnTxt: {
     fontSize: 18,
@@ -118,12 +120,11 @@ const styles = StyleSheet.create({
     textAlign: "center",   
   },
   signupTextCont : {
-  	
+    flexGrow: 1,
     alignItems:'flex-end',
     justifyContent :'center',
-    paddingVertical:10,
-    flexDirection:'row',
-    alignItems:'flex-end',
+    paddingVertical:16,
+    flexDirection:'row'
   },
   signupText: {
   	color:'#851d41',
