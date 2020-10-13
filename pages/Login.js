@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image, navigation} from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
 const userInfo = {username: 'admin', password: '123'}
 
 export default class FirstPage extends React.Component{
-     static navigationOptions = {
-     header: null
- }
+     
 
   constructor(props) {
     super(props);  
@@ -16,6 +15,10 @@ export default class FirstPage extends React.Component{
     };
   }
 
+  signup() {
+		Actions.signup2()
+  }
+  
   render() {   
       return (
         <View style={styles.container}>
@@ -54,13 +57,14 @@ export default class FirstPage extends React.Component{
               <Text style={styles.btnTxt}>Login</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity 
-              style={styles.userBtn}
-              onPress={() => navigation.navigate('Signup')}
-            >
-                <Text style={styles.btnTxt}>Sign up</Text>
-            </TouchableOpacity>
+            
           </View>  
+
+          <View style={styles.signupTextCont}>
+					<Text style={styles.signupText}>Don't have an account yet?</Text>
+					<TouchableOpacity onPress={this.signup}><Text style={styles.signupButton}> Signup</Text></TouchableOpacity>
+				</View>
+
         </View>
       );
     }
@@ -95,20 +99,39 @@ const styles = StyleSheet.create({
     backgroundColor: "#851d41",
     padding: 15,
     marginBottom: 10,
+    fontSize: 15,
   },
   BtnContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "90%",
+    width: "35%",
+    
   },
   userBtn: {
     backgroundColor: "#851d41",
     padding: 15,
-    width: "45%",
+    width: "100%",
   },
   btnTxt: {
     fontSize: 18,
     color: "#fff",
     textAlign: "center",   
+  },
+  signupTextCont : {
+  	
+    alignItems:'flex-end',
+    justifyContent :'center',
+    paddingVertical:10,
+    flexDirection:'row',
+    alignItems:'flex-end',
+  },
+  signupText: {
+  	color:'#851d41',
+  	fontSize:16
+  },
+  signupButton: {
+  	color:'#851d41',
+  	fontSize:16,
+  	fontWeight:'500'
   }
 });
