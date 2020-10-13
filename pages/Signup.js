@@ -1,62 +1,77 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image} from 'react-native';
 // import { Actions } from 'react-native-router-flux';
-
+import { Actions } from 'react-native-router-flux';
 
 
 
 
 export default class SignupPage extends React.Component{
-  //   static navigationOptions = {
-  //   header: null
-  // }
 
-  // constructor(props) {
-  //   super(props);  
-  //   this.state = {
-  //     username: '',
-  //     password: '',
-  //   };
-  // }
 
-  // goback() {
-  //   Actions.pop();
-  // }
   
+goBack() {
+    Actions.pop();
+}
 
 
-//   createNewUser = async (values) => {
-//     try {
-//         const response =  await this.props.dispatch(createNewUser(values));
-//         if (!response.success) {
-//             throw response;
-//         }
-//     } catch (error) {
-//         const newError = new ErrorUtils(error, "Signup Error");
-//         newError.showAlert();
-//     }
-// }
 
-// onSubmit = (values) => {
-//     this.createNewUser(values);
-// }
+constructor(props) {
+  super(props);  
+  this.state = {
+    username: '',
+    password: '',
+  }
+}
 
-// renderTextInput = (field) => {
-//       const {meta: {touched, error}, label, secureTextEntry, maxLength, keyboardType, placeholder, input: {onChange, ...restInput}} = field;
-//       return (
-//           <View>
-//             <InputText
-//                 onChangeText={onChange}
-//                 maxLength={maxLength}
-//                 placeholder={placeholder}
-//                 keyboardType={keyboardType}
-//                 secureTextEntry={secureTextEntry}
-//                 label={label}
-//                 {...restInput} />
-//           {(touched && error) && <Text style={styles.errorText}>{error}</Text>}
-//           </View>
-//       );
-// }
+saveData =async()=>{
+  const {email,password} = this.state;
+
+  //save data with asyncstorage
+  let loginDetails={
+      email: email,
+      password: password
+  }
+
+  if(this.props.type !== 'Login')
+  {
+      AsyncStorage.setItem('loginDetails', JSON.stringify(loginDetails));
+
+      Keyboard.dismiss();
+      alert("You successfully registered. Email: " + email + ' password: ' + password);
+      this.login();
+  }
+  else if(this.props.type == 'Login')
+  {
+      try{
+          let loginDetails = await AsyncStorage.getItem('loginDetails');
+          let ld = JSON.parse(loginDetails);
+
+          if (ld.email != null && ld.password != null)
+          {
+              if (ld.email == email && ld.password == password)
+              {
+                  alert('Go in!');
+                 
+              }
+              else
+              {
+                  alert('Email and Password does not exist!');
+              }
+          }
+
+      }catch(error)
+      {
+          alert(error);
+      }
+  }
+}
+
+showData = async()=>{
+  let loginDetails = await AsyncStorage.getItem('loginDetails');
+  let ld = JSON.parse(loginDetails);
+  alert('email: '+ ld.email + ' ' + 'password: ' + ld.password);
+}
 
 
   render() {   
@@ -76,11 +91,6 @@ export default class SignupPage extends React.Component{
           />
 
           
-          
-              
-          
-
-
           <Text style={styles.welcome}> Register to Pizza-app!</Text>
 
           <TextInput
@@ -118,7 +128,7 @@ export default class SignupPage extends React.Component{
 
             <TouchableOpacity 
               style={styles.userBtn}
-              onPress = {() => this.props.navigation.navigate('Login')}
+              onPress={this.goBack}
             >
               <Text style={styles.btnTxt}>Already an account?</Text>
             </TouchableOpacity>

@@ -1,19 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage, StatusBar, Image, navigation} from 'react-native';
-// import { createStackNavigator } from 'react-navigation-stack';
-// import { Actions } from 'react-native-router-flux';
-
-
-
+import {Actions} from 'react-native-router-flux';
 
 const userInfo = {username: 'admin', password: '123'}
 
-
 export default class FirstPage extends React.Component{
- //class LoginScreen extends Component {
-     static navigationOptions = {
-     header: null
- }
+     
 
   constructor(props) {
     super(props);  
@@ -23,35 +15,22 @@ export default class FirstPage extends React.Component{
     };
   }
 
-  // signup() {
-	// 	Actions.signup()
-	// }
-
-
-
+  signup() {
+		Actions.signup2()
+  }
+  
   render() {   
       return (
         <View style={styles.container}>
-
-      {/* <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
-       style={{width: 400, height: 400}} />   */}
-
-          
           <Image 
               source={require('../assets/pizzalogo14.png')} 
               style={{ width: 205, height: 160, marginBottom: 30}}
           />  
 
           <StatusBar
-              backgroundColor="#A32706"
+              backgroundColor="#851d41"
               barStyle="light-content"
           />
-
-          
-          
-              
-          
-
 
           <Text style={styles.welcome}> Login to Pizza-app!</Text>
           <TextInput
@@ -69,69 +48,41 @@ export default class FirstPage extends React.Component{
             placeholder="Password"
             secureTextEntry          
           />
-
-          
+   
           <View style={styles.BtnContainer}>
             <TouchableOpacity 
               style={styles.userBtn} 
               onPress={this._login}
-              // onPress={() => this.props.navigation.navigate('Details')}
             >
               <Text style={styles.btnTxt}>Login</Text>
             </TouchableOpacity>
 
-            {/* <TouchableOpacity 
-              style={styles.userBtn}
-              onPress={this.signup}
-            >
-              <Text style={styles.btnTxt}>Sign up</Text>
-            </TouchableOpacity> */}
-
-            <TouchableOpacity 
-              style={styles.userBtn}
-              //onPress = {() => this.props.navigation.navigate('Signup')}
-              onPress={() => navigation.navigate('Signup')}
-            >
-                <Text style={styles.btnTxt}>Signupp</Text>
-            </TouchableOpacity>
-
-            {/* <TouchableOpacity 
-              style={styles.userBtn}
-              onPress={() => this.props.navigation.navigate('Signup')}
-            >
-              <Text style={styles.btnTxt}>Sign up</Text>
-            </TouchableOpacity> */}
-
-
-
-
-
+            
           </View>  
+
+          <View style={styles.signupTextCont}>
+					<Text style={styles.signupText}>Don't have an account yet?</Text>
+					<TouchableOpacity onPress={this.signup}><Text style={styles.signupButton}> Signup</Text></TouchableOpacity>
+				</View>
+
         </View>
       );
     }
 
     _login = async() => {
       if(userInfo.username === this.state.username && userInfo.password === this.state.password) {
-        // alert('Logged in');
         await AsyncStorage.setItem('isLoggedIn', '1');
         this.props.navigation.navigate('Fillings');
       } else {
-        alert('Username or Password is incorrect');
-      } 
-      
+        alert('Username or password is incorrect.');
+      }  
     }
-  
-
-
-
-
   }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#A32706',
+    backgroundColor: '#ffae8f',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -140,36 +91,50 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     margin: 10,
-    color: '#fff',
+    color: '#851d41',
     marginBottom: 30,
   },
   input: {
     width: "90%",
-    backgroundColor: "#fff",
+    backgroundColor: "#851d41",
     padding: 15,
     marginBottom: 10,
+    fontSize: 15,
   },
   BtnContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "90%",
-
+    width: "35%",
+    
   },
   userBtn: {
-    backgroundColor: "#FFD700",
+    backgroundColor: "#851d41",
     padding: 15,
-    width: "45%",
-    // fontSize: 18,
-    // textAlign: "center",
+    width: "100%",
   },
   btnTxt: {
     fontSize: 18,
-    textAlign: "center",
-    
+    color: "#fff",
+    textAlign: "center",   
+  },
+  signupTextCont : {
+  	
+    alignItems:'flex-end',
+    justifyContent :'center',
+    paddingVertical:10,
+    flexDirection:'row',
+    alignItems:'flex-end',
+  },
+  signupText: {
+  	color:'#851d41',
+  	fontSize:16
+  },
+  signupButton: {
+  	color:'#851d41',
+  	fontSize:16,
+  	fontWeight:'500'
   }
 });
-
-//export default LoginScreen;
 
 
 // ylempi koodi toimii

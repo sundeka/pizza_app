@@ -542,11 +542,15 @@
 
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Component } from 'react';
+// import { render } from 'react-dom';
 import { View, Text, StyleSheet, SafeAreaView, Button, TouchableOpacity, FlatList, Image, } from 'react-native';
 import FetchFillings from '../dbconn/FetchFillings.js';
 
+
     const SecondPage = () => {
+
+        
 
         const [menus, setMenus] = useState([]); //tähän tallentuu koko menu mistä valitaan käyttäjän täytteisiin sopivat pizzat
         const [selectedId, setSelectedId] = useState(null)
@@ -691,6 +695,7 @@ import FetchFillings from '../dbconn/FetchFillings.js';
     
         content: {
             flex: 10,
+            //backgroundColor: '#ffae8f'
         },
     
         titlediv: {
@@ -749,4 +754,5 @@ import FetchFillings from '../dbconn/FetchFillings.js';
         }
     
     });
+    
     export default SecondPage;

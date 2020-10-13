@@ -1,83 +1,74 @@
-import 'react-native-gesture-handler';
-import React, {Component} from 'react';
-import {ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View, Button} from 'react-native';
-import FirstPage from './pages/Login';
-import SecondPage from './pages/Fillings';
+// import 'react-native-gesture-handler';
+// import React, {Component} from 'react';
+// import {ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View, Button} from 'react-native';
+// import FirstPage from './pages/Login';
+// import SecondPage from './pages/Fillings';
 // import SignupPage from './pages/Signup';
-// import FirstPage from './pages/Login'
-import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-//import FirstPage from './pages/Login';
+// import { createStackNavigator } from 'react-navigation-stack';
+// import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
+// const RootStack = createStackNavigator(
+//   {
+//     HomePage: FirstPage,
+//     Signup: SignupPage,
+//     Fillings: SecondPage,  
+//   },
+//   {
+//     defaultNavigationOptions: {
+//         headerStyle: {
+//           backgroundColor: '#db3056'
+//         },
+//         hearedTintColor: '#fff',
+//         hearedTitleStyle: {
+//           textAlign: 'center',
+//           flex: 1
+//         }
+//     }
+//   },
+// );
 
+// const AuthStack = createStackNavigator({Home: FirstPage})
 
-const RootStack = createStackNavigator(
-  {
-    HomePage: FirstPage,
-    //RegisterPage: SignupPage,
-    Fillings: SecondPage,
+// class AuthLoadingScreen extends Component{
+//   constructor(props){
+//     super(props)
+//     this._loadData();
+//   }
 
-    
-    
-  },
-  {
-    // initialRouteName: 'Home',
-    defaultNavigationOptions: {
-        headerStyle: {
-          backgroundColor: '#A32706'
-        },
-        hearedTintColor: '#fff',
-        hearedTitleStyle: {
-          textAlign: 'center',
-          flex: 1
-        }
-    }
-  },
-);
-const AuthStack = createStackNavigator({Home: FirstPage})
+//   render() {
+//     return(
+//       <View style={styles.container}>
+//         <ActivityIndicator/>
+//         <StatusBar barStyle="default"/>
+//       </View>
+//     );
+//   }
+//   _loadData = async() => {
+//       const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
+//       this.props.navigation.navigate(isLoggedIn !== '1'? 'Auth' : 'App');
+//   }
+// }
 
-class AuthLoadingScreen extends Component{
-  constructor(props){
-    super(props)
-    this._loadData();
-  }
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#db3056',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   }
+// });
 
-  render() {
-    return(
-      <View style={styles.container}>
-        <ActivityIndicator/>
-        <StatusBar barStyle="default"/>
-      </View>
-    );
-  }
-  _loadData = async() => {
-      const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
-      this.props.navigation.navigate(isLoggedIn !== '1'? 'Auth' : 'App');
-  }
-  
+// export default createAppContainer(createSwitchNavigator(
+//   {
+//     AuthLoading: AuthLoadingScreen,
+//     App: RootStack,
+//     Auth: AuthStack,
+//   },
+//   {
+//     initialRouteName: 'AuthLoading',
+//   }
 
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#A32706',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});
-
-export default createAppContainer(createSwitchNavigator(
-  {
-    AuthLoading: AuthLoadingScreen,
-    App: RootStack,
-    Auth: AuthStack,
-  },
-  {
-    initialRouteName: 'AuthLoading',
-  }
-
-));
+// ));
 
 
 
@@ -109,7 +100,35 @@ export default createAppContainer(createSwitchNavigator(
 
 
 
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  View,
+  StatusBar 
+} from 'react-native';
 
+
+import Routes from './src/Routes';
+
+export default class App extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <StatusBar
+           backgroundColor="#1c313a"
+           barStyle="light-content"
+         />
+        <Routes/>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container : {
+    flex: 1,
+  }
+});
 
 
 
