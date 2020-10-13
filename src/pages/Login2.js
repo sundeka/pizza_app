@@ -3,115 +3,25 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  TouchableOpacity, AsyncStorage, Keyboard, navigation
+  TouchableOpacity, Keyboard, 
 } from 'react-native';
 
 import Logo from '../components/Logo';
-
+import Form from '../components/Form';
 
 import {Actions} from 'react-native-router-flux';
 
 export default class Login2 extends Component {
 
 	signup() {
-		Actions.signup2()
-  }
-  
-  
-
-
-  constructor(props){
-    super(props);
-    this.state={
-        email:'',
-        password: ''
-    }
-}
-
-saveData =async()=>{
-    const {email,password} = this.state;
-
-    //save data with asyncstorage
-    let loginDetails={
-        email: email,
-        password: password
-    }
-
-    if(this.props.type !== 'Login')
-    {
-        AsyncStorage.setItem('loginDetails', JSON.stringify(loginDetails));
-
-        Keyboard.dismiss();
-        alert("You successfully registered. Email: " + email + ' password: ' + password);
-        this.login();
-    }
-    else if(this.props.type == 'Login')
-    {
-        try{
-            let loginDetails = await AsyncStorage.getItem('loginDetails');
-            let ld = JSON.parse(loginDetails);
-
-            if (ld.email != null && ld.password != null)
-            {
-                if (ld.email == email && ld.password == password)
-                {
-                   alert("Loggen in!");
-                    
-                }
-                else
-                {
-                    alert('Email and Password does not exist!');
-                }
-            }
-
-        }catch(error)
-        {
-            alert(error);
-        }
-    }
-}
-
-showData = async()=>{
-    let loginDetails = await AsyncStorage.getItem('loginDetails');
-    let ld = JSON.parse(loginDetails);
-    alert('email: '+ ld.email + ' ' + 'password: ' + ld.password);
-}
-
-
+		Actions.signup()
+	}
 
 	render() {
 		return(
 			<View style={styles.container}>
 				<Logo/>
-				
-        <View style={styles.container2}>
-                <TextInput style={styles.inputBox}
-                onChangeText={(email) => this.setState({email})}
-                underlineColorAndroid='rgba(0,0,0,0)' 
-                placeholder="Email"
-                placeholderTextColor = "#ffffff"
-                selectionColor="#fff"
-                keyboardType="email-address"
-                onSubmitEditing={()=> this.password.focus()}/>
-                
-                <TextInput style={styles.inputBox}
-                onChangeText={(password) => this.setState({password})} 
-                underlineColorAndroid='rgba(0,0,0,0)' 
-                placeholder="Password"
-                secureTextEntry={true}
-                placeholderTextColor = "#ffffff"
-                ref={(input) => this.password = input}
-                />
- 
-                <TouchableOpacity style={styles.button}> 
-                    <Text style={styles.buttonText} onPress={() => navigation.navigate('Fillings2')}>{this.props.type}Login</Text>
-                </TouchableOpacity>
-            </View>
-
-
-                
-
+				<Form type="Login"/>
 				<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}>Don't have an account yet?</Text>
 					<TouchableOpacity onPress={this.signup}><Text style={styles.signupButton}> Signup</Text></TouchableOpacity>
@@ -143,34 +53,6 @@ const styles = StyleSheet.create({
   	color:'#851d41',
   	fontSize:16,
   	fontWeight:'500'
-  }, 
-  container2 : {
-    flexGrow: 1,
-    justifyContent:'center',
-    alignItems: 'center'
-  },
-
-  inputBox: {
-    width:300,
-    backgroundColor:'#851d41',
-    borderRadius: 20,
-    paddingHorizontal:16,
-    fontSize:16,
-    color:'#ffffff',
-    marginVertical: 10
-  },
-  button: {
-    width:300,
-    backgroundColor:'#851d41',
-     borderRadius: 20,
-      marginVertical: 10,
-      paddingVertical: 13
-  },
-  buttonText: {
-    fontSize:16,
-    fontWeight:'500',
-    color:'#ffffff',
-    textAlign:'center'
   }
-  
+
 });
