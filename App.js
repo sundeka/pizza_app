@@ -9,7 +9,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 const RootStack = createStackNavigator(
   {
-    HomePage: FirstPage,
+    Login: FirstPage,
     Fillings: SecondPage,
     Order: Orderpage,
   },
