@@ -4,14 +4,18 @@ import {ActivityIndicator, AsyncStorage, StatusBar, StyleSheet, View, Button} fr
 import FirstPage from './pages/Login';
 import SecondPage from './pages/Fillings';
 import Orderpage from './pages/Orderpage2';
+import SignupPage from './pages/Signup';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+
 
 const RootStack = createStackNavigator(
   {
     Login: FirstPage,
     Fillings: SecondPage,
     Order: Orderpage,
+    Signup: SignupPage,
+
   },
   {
     defaultNavigationOptions: {
