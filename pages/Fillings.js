@@ -91,10 +91,10 @@ import FetchFillings from '../dbconn/FetchFillings.js';
     
       return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.topBar}>
+{/*             <View style={styles.topBar}>
                 <Image source={require('../assets/pizza10.png')}
                 style={styles.logo}/>
-            </View>
+            </View> */}
             <View style={styles.content}>
                 <View style={styles.titlediv}>
                     <Text style={styles.titletext}>SELECT YOUR TOPPINGS</Text>
