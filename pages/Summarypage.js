@@ -1,123 +1,136 @@
-import React, { useState, useEffect } from "react";
-import {View, Text, FlatList, StyleSheet, Alert, ActivityIndicator} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import CountDown from 'react-native-countdown-component';
 
 
-const App = () => {
-  const [hasError, setErrors] = useState(false);
-  const [someError, setSomeErrors] = useState('');
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setLoading]=useState(true);
-  const [userID, setUserId] = useState[null];
+
+export default class Screen2 extends Component {
   
+    render(){
+        
 
 
 
-//And the third version with longer code and normal single function calls.
-  async function fetchData() {
-    //Variable res is used later, so it must be introduced before try block and so cannot be const.
-    let res = null;
-    try{
-      //This will wait the fetch to be done - it is also timeout which might be a response (server timeouts)
-      res=await fetch("https://pizzaapp-290908.appspot.com/rest/pizzaservice/getOrders");
+        return(
+
+
+
+
+            <View style = { styles.MainContainer }>
+
+                 <Text></Text>
+                <Text style={styles.titleText}>Your order will be ready soon:</Text>
+    <CountDown
+        until={60 * 15 + 0}
+        size={45}
+        onFinish={() => alert('Your order is ready!')}
+        digitStyle={{backgroundColor: '#FFAE8F'}}
+        digitTxtStyle={{color: '#851D41'}}
+        timeToShow={['M', 'S']}
+        timeLabels={{m: null, s: null}}
+        separatorStyle={{color: '#851D41'}}
+        showSeparator
+
+      />
+                <Text style={styles.titleText}>Order summary:</Text>
+                <Text></Text>
+                <Text style={styles.titleBold}>Pizza: </Text>
+                <Text>{this.props.navigation.state.params.Pizza}</Text>
+                <Text style={styles.titleBold}>Restaurant: </Text>
+                <Text>{this.props.navigation.state.params.Restaurant}</Text>
+                <Text style={styles.titleBold}>Total price: </Text>
+                <Text>{this.props.navigation.state.params.Price}€</Text>
+                <Text></Text>
+                <Text style={styles.titleText}>Orderer information:</Text>
+                <Text></Text>
+
+                <Text style={styles.titleBold}>Full name: </Text>
+                <Text>{this.props.navigation.state.params.Firstname} {this.props.navigation.state.params.Lastname}</Text>
+                <Text style={styles.titleBold}>Email address: </Text>
+                <Text>{this.props.navigation.state.params.Email}</Text>
+                <Text style={styles.titleBold}>Phonenumber: </Text>
+                <Text>{this.props.navigation.state.params.Phone}</Text>
+                <Text style={styles.titleBold}>Address: </Text>
+                <Text>{this.props.navigation.state.params.Address}</Text>
+
+
+                
+                    
+                   
+            </View>
+        )
     }
-    catch(error){
-      setErrors(true);
-    }
 
-    try{
-      //Getting json from the response
-      const responseData = await res.json();
-      console.log(responseData);//Just for checking.....
-      setMovies(responseData);
-    }
-    catch(err){
-      setErrors(true);
-      setSomeErrors("ERROR: "+hasError+ " my error "+err);
-      console.log(someError);
-    }
+    
+
   }
+  const styles = StyleSheet.create(
+    {
+      MainContainer:
+      {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 0,
+        backgroundColor:'#FFAE8F',
+  
+      },
+     
+        TextInputStyleClass:
+        {
+    
+          textAlign: 'center',
+          height: 40,
+          backgroundColor : "#851D41",
+          borderWidth: 2.5,
+          borderColor: 'black',
+          borderRadius: 2 ,
+          marginBottom: 15,
+          width: '95%',
+        
+        },
+     
+        TouchableOpacityStyle:
+       {
+          paddingTop:10,
+          paddingBottom:10,
+          marginBottom: 20,
+          width: '50%'
+     
+        },
+     
+        titleText:
+        {
+            fontSize: 25,
+            fontWeight: 'bold',
+            color: '#851D41',
+        },
+        titleBold:
+        {
+            fontWeight: 'bold'
+        },
+        textTest:
+        {
+            paddingBottom: 15,
+        },
+        FontStyle:
+        {
+           color: '#fff',
+            textAlign: 'center',
+            fontSize: 25
+        },
+    
+        ActivityIndicatorStyle:{
+          
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          alignItems: 'center',
+          justifyContent: 'center'
+        
+      }
+    });
 
-  //This is called every time the view is rendered
-  //The new calls of fetchData (and others) must be stopped somehow, because in
-  //those methods are statevariables set, which cause a new re-render.
-  useEffect(() => {
-      if (isLoading==true){
-      setLoading(false);
-      fetchData();
-      // fetchFish();
-      // fetchFish2();
-    }
-  });
-
-  //If the 'fetch' is not ready yet, an activityindicator is shown
-  if (isLoading==true) {
-    return (
-      <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
-        <ActivityIndicator size="large" color="#00ff00" />
-      </View>
-    );
-  }
-  //If errors
-  else if(hasError){
-    return(
-      <View style={{flex: 1, padding: 20, justifyContent:'center'}}>
-        <Text>{hasError}</Text>
-        <Text>{""+someError}</Text>
-      </View>
-    );
-  }
-  //Otherwise the list is shown
-  else{
-    return (
-      <View style={{marginTop:50}}>
-        <Text>{hasError}</Text>
-        <Text>Tässä on yhteenveto tilauksestasi [name]</Text>
-        <Text>Valitsemasi pizza: [pizza]</Text>
-        <FlatList
-            data={movies}
-            
-            // data={movies.movies}
-            renderItem={({item}) => (
-              <View style={styles.listItem}>
-                {/* <Text>{item.id}) {item.title}, {item.releaseYear}</Text> */}
-                <Text>Valitsemasi pizza: {item.pizza}</Text>
-              </View>
-            )}
-            keyExtractor={(item) => item.id.toString()}
-        />
-        <Text>Hinta: [price]</Text>
-        <Text>Tilaajan tiedot:</Text>
-        <Text>Etunimi:</Text>
-        <Text>Sukunimi:</Text>
-        <Text>Sähköposti:</Text>
-        <Text>Osoite:</Text>
-        <Text>Puhelinnumero:</Text>
-
-        <FlatList
-            data={movies}
-            
-            // data={movies.movies}
-            renderItem={({item}) => (
-              <View style={styles.listItem}>
-                {/* <Text>{item.id}) {item.title}, {item.releaseYear}</Text> */}
-                <Text>{item.id}) {item.pizza}, {item.price}, {item.firstname}, {item.lastname}, {item.email}, {item.phonenumber}, {item.address}</Text>
-              </View>
-            )}
-            keyExtractor={(item) => item.id.toString()}
-        />
-      </View>
-    );
-  }
-};
-
-const styles=StyleSheet.create({
-  listItem:{
-    padding: 2,
-    marginVertical: 2,
-    borderWidth: 2,
-    borderColor: '#000000',
-    backgroundColor: '#FFFFF0',    
-  }
-});
-
-export default App;
+  

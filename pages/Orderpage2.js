@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Button, Text, Alert, TouchableOpacity, StatusBar} from 'react-native';
-export default class Project extends Component {
-constructor() {
-    super()
+import { StyleSheet, View, Button, Text, Alert, TouchableOpacity, StatusBar, setState} from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
+
+
+
+
+export default class Screen1 extends Component {
+constructor(props)
+  {
+    super(props);
     this.state = {
       PizzaName: 'Special Secret Pizza',
       PricePrice: 9.97,
@@ -11,9 +17,12 @@ constructor() {
       LastName: '',
       EmailEmail: '',
       PhoneNumber: '',
-      AddRess: ''
-    }
+      AddRess: '', 
+    };
+    
   }
+
+  
   
   OrderFunction = () =>{
   fetch("https://pizzaapp-290908.appspot.com/rest/pizzaservice/addorder",
@@ -57,16 +66,16 @@ constructor() {
       
 <View style = { styles.MainContainer } >
 
-<StatusBar
+{/* <StatusBar
               backgroundColor="#851d41"
               barStyle="dark-content"
-          />
+          /> */}
 
         <Text style={styles.titleText} >Fill your info</Text>
         <Text></Text>
-        <Text style={styles.titleBold}>Our Pizza: </Text>
+        <Text style={styles.titleBold}>Your Pizza: </Text>
         <Text style={styles.textTest}>{this.state.PizzaName}</Text>
-        <Text style={styles.titleBold}>Tolta price: </Text>
+        <Text style={styles.titleBold}>Total price: </Text>
         <Text style={styles.textTest}>{this.state.PricePrice} €</Text>
         <Text style={styles.titleBold}>Restaurant: </Text>
         <Text style={styles.textTest}>{this.state.RestauRant}</Text>
@@ -83,6 +92,7 @@ constructor() {
           style = { styles.TextInputStyleClass }
 
           /> */}
+          
         <TextInput
           placeholder='Enter First Name'
           onChangeText={firstname => this.setState({FirstName : firstname})}
@@ -126,10 +136,29 @@ constructor() {
           />
 <TouchableOpacity style = { styles.TouchableOpacityStyle }>
 
-        <Button title='Click Here To Order' onPress={()=> this.props.navigation.navigate('Summarypage'), this.OrderFunction} color='#851D41' />
+        <Button 
+        
+        title='Click Here To Order' 
+        color='#851D41'
+        onPress={()=>this.props.navigation.navigate('Screen2',  
+        {
+        Pizza: this.state.PizzaName,
+        Price: this.state.PricePrice,
+        Restaurant: this.state.RestauRant,
+        Firstname: this.state.FirstName,
+        Lastname: this.state.LastName,
+        Email: this.state.EmailEmail,
+        Phone: this.state.PhoneNumber,
+        Address: this.state.AddRess
+        })}  
+        />
+
+        
         </TouchableOpacity>
   
+  
 </View>
+
             
     );
   }
@@ -202,4 +231,6 @@ const styles = StyleSheet.create(
         justifyContent: 'center'
       
     }
+  
   });
+
