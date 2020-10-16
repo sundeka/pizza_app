@@ -142,7 +142,7 @@ constructor(props) {
         title='Click Here To Order' 
         color='#851D41'
         onPress={()=>{
-          this.OrderFunction(); this.props.navigation.navigate('Summarypage',  
+          this.OrderFunction(); this.props.navigation.navigate('Summary',  
           {
           Pizza: this.state.PizzaName,
           Price: this.state.PricePrice,
