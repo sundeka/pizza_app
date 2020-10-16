@@ -21,8 +21,8 @@ constructor(props)
     };
     
   }
-
   
+
   
   OrderFunction = () =>{
   fetch("https://pizzaapp-290908.appspot.com/rest/pizzaservice/addorder",
@@ -48,11 +48,12 @@ constructor(props)
   }).then((response) => response.json())
         .then((responseJson) => {
   
-         Alert.alert(responseJson);
+         //Alert.alert(responseJson);
 
 
 
-         //Alert.alert(JSON.stringify(responseJson));
+         //Alert.alert('Error:', error.message)
+
 
   
         }).catch((error) => {
@@ -136,11 +137,32 @@ constructor(props)
           />
 <TouchableOpacity style = { styles.TouchableOpacityStyle }>
 
-        <Button 
+<Button 
         
         title='Click Here To Order' 
         color='#851D41'
-        onPress={()=>this.props.navigation.navigate('Screen2',  
+        onPress={()=>{
+          this.OrderFunction(); this.props.navigation.navigate('Screen2',  
+          {
+          Pizza: this.state.PizzaName,
+          Price: this.state.PricePrice,
+          Restaurant: this.state.RestauRant,
+          Firstname: this.state.FirstName,
+          Lastname: this.state.LastName,
+          Email: this.state.EmailEmail,
+          Phone: this.state.PhoneNumber,
+          Address: this.state.AddRess
+        });}}
+
+         
+        />
+
+        {/* <Button 
+        
+        title='Click Here To Order' 
+        color='#851D41'
+        onPress={()=> 
+          this.props.navigation.navigate('Screen2',  
         {
         Pizza: this.state.PizzaName,
         Price: this.state.PricePrice,
@@ -151,7 +173,7 @@ constructor(props)
         Phone: this.state.PhoneNumber,
         Address: this.state.AddRess
         })}  
-        />
+        /> */}
 
         
         </TouchableOpacity>

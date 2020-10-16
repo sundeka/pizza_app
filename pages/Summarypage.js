@@ -18,7 +18,6 @@ export default class Screen2 extends Component {
 
             <View style = { styles.MainContainer }>
 
-                 <Text></Text>
                 <Text style={styles.titleText}>Your order will be ready soon:</Text>
     <CountDown
         until={60 * 15 + 0}
