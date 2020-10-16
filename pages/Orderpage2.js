@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Button, Text, Alert, TouchableOpacity, StatusBar, setState} from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { StyleSheet, View, TextInput, Button, Text, Alert, TouchableOpacity, StatusBar, setState} from 'react-native';
 
+export default class Project extends Component {
+  
+constructor(props) {
 
-
-
-export default class Screen1 extends Component {
-constructor(props)
-  {
-    super(props);
+    super(props)
+    var rest = props.navigation.state.params.restaurant;
+    var price = props.navigation.state.params.price;
+    var piz = props.navigation.state.params.pizza;
     this.state = {
-      PizzaName: 'Special Secret Pizza',
-      PricePrice: 9.97,
-      RestauRant: 'Pizza Kebab Pentti',
+      PizzaName: piz,
+      PricePrice: price,
+      RestauRant: rest,
       FirstName: '',
       LastName: '',
       EmailEmail: '',
@@ -142,7 +142,7 @@ constructor(props)
         title='Click Here To Order' 
         color='#851D41'
         onPress={()=>{
-          this.OrderFunction(); this.props.navigation.navigate('Screen2',  
+          this.OrderFunction(); this.props.navigation.navigate('Summarypage',  
           {
           Pizza: this.state.PizzaName,
           Price: this.state.PricePrice,
