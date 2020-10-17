@@ -5,6 +5,7 @@ import FirstPage from './pages/Login';
 import SecondPage from './pages/Fillings';
 import Orderpage from './pages/Orderpage2';
 import SignupPage from './pages/Signup';
+import Summarypage from './pages/Summarypage';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
@@ -15,6 +16,7 @@ const RootStack = createStackNavigator(
     Fillings: SecondPage,
     Order: Orderpage,
     Signup: SignupPage,
+    Summary: Summarypage,
 
   },
   {
@@ -73,70 +75,6 @@ export default createAppContainer(createSwitchNavigator(
   }
 
 ));
-
-
-
-// toimii ylempi koodi
-
-
-
-
-
-// import { createAppContainer } from 'react-navigation';
-// import { createStackNavigator } from 'react-navigation-stack';
-// import LoginScreen from './src/screens/LoginScreen';
-// import HomeScreen from './src/screens/HomeScreen';
-// import CreateAccountScreen from './src/screens/CreateAccountScreen';
-
-// const AppNavigator = createStackNavigator(
-//   {
-//     Home: HomeScreen,
-//     Login: LoginScreen,
-//     CreateAccount: CreateAccountScreen,
-//   },
-//   {
-//     initialRouteName: 'Home',
-//   },
-// );
-
-// export default createAppContainer(AppNavigator);
-
-
-
-
-// import React, { Component } from 'react';
-// import {
-//   StyleSheet,
-//   View,
-//   StatusBar 
-// } from 'react-native';
-
-
-// import Routes2 from './src/Routes2';
-
-// export default class App extends Component {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <StatusBar
-//            backgroundColor="#1c313a"
-//            barStyle="light-content"
-//          />
-//         <Routes/>
-//       </View>
-//     );
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container : {
-//     flex: 1,
-//   }
-// });
-
-
-
-
 
 
 

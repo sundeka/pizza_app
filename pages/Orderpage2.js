@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Button, Text, Alert, TouchableOpacity, StatusBar} from 'react-native';
+import { StyleSheet, View, TextInput, Button, Text, Alert, TouchableOpacity, StatusBar, setState} from 'react-native';
 
 export default class Project extends Component {
   
@@ -17,9 +17,12 @@ constructor(props) {
       LastName: '',
       EmailEmail: '',
       PhoneNumber: '',
-      AddRess: ''
-    }
+      AddRess: '', 
+    };
+    
   }
+  
+
   
   OrderFunction = () =>{
   fetch("https://pizzaapp-290908.appspot.com/rest/pizzaservice/addorder",
@@ -45,8 +48,14 @@ constructor(props) {
   }).then((response) => response.json())
         .then((responseJson) => {
   
-         Alert.alert(responseJson);
+         //Alert.alert(responseJson);
 
+
+
+         //Alert.alert('Error:', error.message)
+
+
+  
         }).catch((error) => {
           console.error(error);
         });
@@ -58,10 +67,10 @@ constructor(props) {
       
 <View style = { styles.MainContainer } >
 
-<StatusBar
+{/* <StatusBar
               backgroundColor="#851d41"
               barStyle="dark-content"
-          />
+          /> */}
 
         <Text style={styles.titleText} >Fill your info</Text>
         <Text></Text>
@@ -71,6 +80,19 @@ constructor(props) {
         <Text style={styles.textTest}>{this.state.PricePrice} €</Text>
         <Text style={styles.titleBold}>Restaurant: </Text>
         <Text style={styles.textTest}>{this.state.RestauRant}</Text>
+        {/* <TextInput
+          placeholder='Enter Pizza Name'
+          onChangeText={pizza => this.setState({PizzaName : pizza})}
+          underlineColorAndroid='transparent'
+          style = { styles.TextInputStyleClass }
+          /> */}
+        {/* <TextInput
+          placeholder='Enter Price'
+          onChangeText={price => this.setState({PricePrice : price})}
+          underlineColorAndroid='transparent'
+          style = { styles.TextInputStyleClass }
+          /> */}
+          
         <TextInput
           placeholder='Enter First Name'
           onChangeText={firstname => this.setState({FirstName : firstname})}
@@ -114,10 +136,50 @@ constructor(props) {
           />
 <TouchableOpacity style = { styles.TouchableOpacityStyle }>
 
-        <Button title='Click Here To Order' onPress={()=> this.props.navigation.navigate('Summarypage'), this.OrderFunction} color='#851D41' />
+<Button 
+        
+        title='Click Here To Order' 
+        color='#851D41'
+        onPress={()=>{
+          this.OrderFunction(); this.props.navigation.navigate('Summary',  
+          {
+          Pizza: this.state.PizzaName,
+          Price: this.state.PricePrice,
+          Restaurant: this.state.RestauRant,
+          Firstname: this.state.FirstName,
+          Lastname: this.state.LastName,
+          Email: this.state.EmailEmail,
+          Phone: this.state.PhoneNumber,
+          Address: this.state.AddRess
+        });}}
+
+         
+        />
+
+        {/* <Button 
+        
+        title='Click Here To Order' 
+        color='#851D41'
+        onPress={()=> 
+          this.props.navigation.navigate('Screen2',  
+        {
+        Pizza: this.state.PizzaName,
+        Price: this.state.PricePrice,
+        Restaurant: this.state.RestauRant,
+        Firstname: this.state.FirstName,
+        Lastname: this.state.LastName,
+        Email: this.state.EmailEmail,
+        Phone: this.state.PhoneNumber,
+        Address: this.state.AddRess
+        })}  
+        /> */}
+
+        
         </TouchableOpacity>
   
+  
 </View>
+
             
     );
   }
@@ -190,4 +252,5 @@ const styles = StyleSheet.create(
         justifyContent: 'center'
       
     }
+  
   });
